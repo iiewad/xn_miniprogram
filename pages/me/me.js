@@ -4,10 +4,14 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: true
+  },
+  bindUserTap: function() {
+    wx.navigateTo({
+      url: '../bind_user/bind_user'
+    })
   },
   //事件处理函数
   bindViewTap: function() {

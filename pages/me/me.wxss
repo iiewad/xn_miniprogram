@@ -42,13 +42,13 @@
 }
 
 .bind-button {
-  margin-top: 200rpx;
-  width: 85%;
-  margin: 200rpx auto 20rpx auto;
+  margin-top: 300rpx;
+  width: 100%;
 }
 
 .bind-button button {
   background-color: red;
+  width: 85%;
   font-size: 14px;
   font-weight: bold;
   color: #f0f0f0;

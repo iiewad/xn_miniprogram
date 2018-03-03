@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/me/me",
+    "pages/bind_user/bind_user",
     "pages/logs/logs"
   ],
   "window":{
