@@ -1,0 +1,55 @@
+/**index.wxss**/
+.userheader {
+  background-color: #3598dc;
+  width: 100%;
+  height: 400rpx;
+}
+
+.userinfo {
+  margin: 0 auto;
+  width: 100%;
+  height: 400rpx;
+  text-align: center;  
+}
+
+.userinfo-avatar {
+  float: left;
+  width: 158rpx;
+  height: 158rpx;
+  margin: 70rpx 40% 30rpx 40%;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.user-feed-back {
+  float: left;
+  width: 100%;
+  height: 400rpx;
+  margin: 25rpx auto;
+  line-height: 22px;
+}
+.user-feed-back view {
+  font-size: 14px;
+}
+.user-feed-back image {
+  margin-right: 5px;
+  vertical-align: middle;
+  width:20px;
+  height: 20px;
+}
+
+.bind-button {
+  margin-top: 200rpx;
+  width: 85%;
+  margin: 200rpx auto 20rpx auto;
+}
+
+.bind-button button {
+  background-color: red;
+  font-size: 14px;
+  font-weight: bold;
+  color: #f0f0f0;
+}

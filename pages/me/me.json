@@ -1,0 +1,9 @@
+{
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#3598dc",
+    "navigationBarBackgroundColor": "#3598dc",
+    "navigationBarTitleText": "我的",
+    "navigationBarTextStyle": "black"
+  }
+}
