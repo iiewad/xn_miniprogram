@@ -6,7 +6,8 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: true
+    stu_userInfo: {},
+    hasStuUserInfo: false
   },
   bindUserTap: function() {
     wx.navigateTo({
@@ -46,6 +47,7 @@ Page({
         }
       })
     }
+    this.getStuUserInfo();    
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -54,5 +56,24 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getStuUserInfo: function(e) {
+    wx.getStorage({
+      key: 'stu_userinfo',
+      success: res => {
+        this.setStuUserInfo(res.data);
+      },
+      fail: function () {
+        console.log('Get stu_userinfo failed')
+      }
+    });
+  },
+  setStuUserInfo: function(e) {
+    console.log(e)
+    this.setData({
+      stu_userInfo: e,
+      hasStuUserInfo: true
+    });
+
   }
 })

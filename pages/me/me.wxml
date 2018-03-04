@@ -1,11 +1,22 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userheader">
-    <view class="userinfo">
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+
+  <view class="weui-cells user-header">
+    <view class="weui-cell">
+      <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" />
+      </view>
+      <view class="weui-cell__bd">
+        <view>{{userInfo.nickName}}</view>
+        <view 
+          style="font-size: 13px;color: #888888;"
+          wx:if="{{!hasStuUserInfo}}"
+        >
+        未绑定</view>
+      </view>
     </view>
   </view>
+
 
   <view class="page__bd user-feed-back">
     <view class="weui-cells">
@@ -33,7 +44,7 @@
     </view>
   </view>
 
-  <view class="bind-button">
+  <view class="bind-button" wx:if="{{hasStuUserInfo == false}}">
     <button bindtap="bindUserTap">立即绑定</button>
   </view>
 </view>

@@ -79,11 +79,11 @@ Page({
                   duration: 2000
                 });
                 wx.setStorage({
-                  key: 'stu_user',
+                  key: 'stu_userinfo',
                   data: res.data.userinfo
                 });
-                wx.navigateBack({
-                  delta: 1
+                wx.redirectTo({
+                  url: '../me/me'
                 });
               }
             }
