@@ -1,0 +1,21 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+
+  <swiper class="swiper-menu" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{funcItems}}">
+      <swiper-item>
+        <view class="menu-content">
+          <block wx:for="{{menuItems}}">
+            <view class="menu-item">
+              <view class="menu-item-img">
+                <image src="{{item.imagePath}}"></image>
+              </view>
+              <text>{{item.name}}</text>
+            </view>
+          </block>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+</view>

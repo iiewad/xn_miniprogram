@@ -1,0 +1,44 @@
+/* pages/index/index.wxss */
+
+.container {
+  width: 100%;
+}
+
+.swiper-menu {
+  height: 365rpx;
+  padding: 15rpx 10rpx 10rpx;
+}
+
+.swiper-menu .menu-content {
+  width: 100%;
+  background: #fff;
+  min-height: 365rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+  overflow: hidden;
+}
+
+.swiper-menu .menu-content .menu-item {
+  float: left;
+  width: 20%;
+  height: 170rpx;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+  margin: 0rpx auto;
+}
+
+.swiper-menu .menu-content .menu-item .menu-item-img {
+  width: 75rpx;
+  height: 75rpx;
+  margin: 15rpx auto;
+  border-radius: 35%;
+  background: #f1f1f1;
+  padding: 10rpx;
+}
+
+.swiper-menu .menu-content .menu-item .menu-item-img image {
+  display: block;
+  width: 65rpx;
+  height: 65rpx;
+  margin: 10rpx auto;
+}
