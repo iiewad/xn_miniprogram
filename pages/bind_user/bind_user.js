@@ -7,11 +7,18 @@ Page({
     canIUse: true
   },
   formSubmit: function (e) {
-    debugger
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1500
+    });
     if(this.checkForm(e)) {
       console.log("Input Data is OK");
-      var params = e.detail.value;
-      this.requestXnService(params);
+      var stu_user = {}
+      stu_user.stu_number = e.detail.value.stu_number
+      stu_user.stu_password = e.detail.value.stu_password
+      console.log(stu_user)
+      this.requestXnService(stu_user);
     } else {
       
     }
@@ -36,36 +43,56 @@ Page({
     }
     return true;
   },
-  requestXnService: function (params) {
-    wx.request({
-      url: 'http://api.xnqn.com/api/bind-stu-user', //仅为示例，并非真实的接口地址
-      data: {
-        'stu_number': params.stu_number,
-        'stu_password': params.stu_password
-      },
-      method: "GET",
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data);
-        if(res.data.status == "failed") {
-          wx.showToast({
-            title: res.data.message + ': ' + res.data.message_detail,
-            icon: 'none',
-            duration: 2000
+  requestXnService: function (stu_user) {
+    // 登录
+    wx.login({
+      success: res => {
+        console.log(res)
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          wx.request({
+            url: 'http://api.xnqn.com/api/bind-stu-user', //仅为示例，并非真实的接口地址
+            data: {
+              'stu_user[stu_number]': stu_user.stu_number,
+              'stu_user[stu_password]': stu_user.stu_password,
+              'code': res.code
+            },
+            method: "GET",
+            header: {
+              "accept": "application/vnd.api+json;version=1",
+              'content-type': 'application/json' // 默认值
+            },
+            success: function (res) {
+              console.log(res.data);
+              if (res.data.status == "failed") {
+                wx.showToast({
+                  title: '绑定失败: ' + res.data.message_detail,
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+              if (res.data.status == "success") {
+                console.table(res.data)
+                wx.showToast({
+                  title: '绑定成功',
+                  icon: 'success',
+                  duration: 2000
+                });
+                wx.setStorage({
+                  key: 'stu_user',
+                  data: res.data.userinfo
+                });
+                wx.navigateBack({
+                  delta: 1
+                });
+              }
+            }
           });
-        }
-        if(res.data.status == "success") {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'success',
-            duration: 2000
-          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
         }
       }
-    });
+    })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

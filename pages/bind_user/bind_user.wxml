@@ -17,9 +17,8 @@
         <input name="stu_password" placeholder-class='stu_info_placeholder' type="password" placeholder="请输入密码" />
       </view>
       
-
       <view class="btn-area form-button-view">
-        <button formType="submit" class="send-form-button">Submit</button>
+        <button formType="submit" class="send-form-button">立即绑定</button>
       </view>
     </form>
   </view>
