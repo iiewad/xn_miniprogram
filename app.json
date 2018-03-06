@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/news/news",
     "pages/me/me",
     "pages/bind_user/bind_user",
     "pages/logs/logs"
@@ -14,8 +15,8 @@
         "selectedIconPath": "images/index-selected-tabbar.png"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "日志",
+        "pagePath": "pages/news/news",
+        "text": "新闻",
         "iconPath": "images/news-tabbar.png",
         "selectedIconPath": "images/news-selected-tabbar.png"
       },

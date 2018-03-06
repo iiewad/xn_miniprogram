@@ -51,7 +51,7 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           wx.request({
-            url: 'http://api.xnqn.com/api/bind-stu-user', //仅为示例，并非真实的接口地址
+            url: 'http://xnqn.lidawei.me/api/bind-stu-user', //仅为示例，并非真实的接口地址
             data: {
               'stu_user[stu_number]': stu_user.stu_number,
               'stu_user[stu_password]': stu_user.stu_password,
@@ -72,18 +72,18 @@ Page({
                 });
               }
               if (res.data.status == "success") {
-                console.table(res.data)
-                wx.showToast({
-                  title: '绑定成功',
-                  icon: 'success',
-                  duration: 2000
+                console.table(res.data);
+                wx.reLaunch({
+                  url: '../me/me'
                 });
                 wx.setStorage({
                   key: 'stu_userinfo',
                   data: res.data.userinfo
                 });
-                wx.redirectTo({
-                  url: '../me/me'
+                wx.showToast({
+                  title: '绑定成功',
+                  icon: 'success',
+                  duration: 2000
                 });
               }
             }
