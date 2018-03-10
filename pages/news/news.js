@@ -4,6 +4,11 @@ Page({
     news_list: {},
     news_page: {}
   },
+  tapShowNews: function (e) {
+    wx.navigateTo({
+      url: 'show_news/show_news?news_id=' + e.currentTarget.id
+    })
+  },
   upper: function(e) {
     return false;
   },
@@ -55,7 +60,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.getNewsInfo(0);
+    this.getNewsInfo();
   },
 
   /**

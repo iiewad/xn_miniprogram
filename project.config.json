@@ -37,7 +37,14 @@
 				{
 					"id": -1,
 					"name": "news",
-					"pathName": "pages/news/news"
+					"pathName": "pages/news/news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "show_news",
+					"pathName": "pages/news/show_news/show_news",
+					"query": ""
 				}
 			]
 		}

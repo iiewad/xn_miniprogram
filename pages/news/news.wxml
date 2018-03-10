@@ -2,7 +2,7 @@
 <view class="container">
   <scroll-view class="news_list" scroll-y bindscrolltolower="lower" bindscrolltoupper="upper">
     <block wx:for="{{news_list}}" wx:key="newsItem">
-      <view class="list">
+      <view class="list" id="{{item.id}}" bindtap="tapShowNews">
         <view class="privew-news-info">
           <view class="news-title">{{ item.title }}</view>
           <view class="news-date">{{ item.adddate }}</view>

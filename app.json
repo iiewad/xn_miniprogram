@@ -4,6 +4,7 @@
     "pages/news/news",
     "pages/me/me",
     "pages/bind_user/bind_user",
+    "pages/news/show_news/show_news",
     "pages/logs/logs"
   ],
   "tabBar": {
@@ -33,7 +34,6 @@
     "backgroundColor": "#3598dc",
     "navigationBarBackgroundColor": "#3598dc",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "black"
   }
 }
