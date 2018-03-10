@@ -1,1 +1,50 @@
 /* pages/news/news.wxss */
+.container {
+  height: 100%;
+}
+.news_list {
+  font-size: 32rpx;
+  width: 95%;
+  height: 100vh;
+  margin: 20rpx auto;
+  color: #F5F5F5;
+}
+.list {
+  width: 100%;
+  height: 110rpx;
+  background: #0B9BA9;
+  border-radius: 10rpx;
+  padding: 10rpx 0 10rpx 10rpx;
+  box-shadow: 1px 0px 2px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-sizing: border-box;
+  margin: 20rpx auto;
+  text-align: left;
+  
+}
+
+.privew-news-info {
+  width: 85%;
+  float: left;
+  border-right: 1px solid #c7c7bc; 
+}
+
+.news-title {
+
+}
+.news-date {
+  font-size: 28rpx;
+  color: #DCDCDC;
+  font-weight: 0;
+}
+
+.privew-icon {
+  width: 14%;
+  height: 100%;
+  float: right;
+}
+
+.privew-icon image {
+  width: 64rpx;
+  height: 64rpx;
+  padding: 15rpx;
+}

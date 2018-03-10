@@ -42,7 +42,7 @@ Page({
     funcItems: [
       '1'
     ],
-    indicatorDots: true,
+    indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000

@@ -32,7 +32,7 @@
   height: 75rpx;
   margin: 15rpx auto;
   border-radius: 35%;
-  background: #f1f1f1;
+  background: #DADCDB;
   padding: 10rpx;
 }
 
