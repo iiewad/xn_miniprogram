@@ -1,0 +1,19 @@
+.container {
+  background-color: #BCD8C1;
+}
+.weui-btn-area {
+  margin: 0;
+}
+.grade-item {
+  margin: 30rpx auto;
+}
+.grade-item-header {
+  height: 50rpx;
+  line-height: normal;
+}
+.grade-kcm {
+  font-size: 36rpx;
+}
+.weui-form-preview__value_in-hd {
+  font-size: 36rpx;
+}

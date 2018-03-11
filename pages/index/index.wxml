@@ -2,11 +2,11 @@
 <view class="container">
 
   <swiper class="swiper-menu" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{funcItems}}">
+    <block wx:for="{{funcItems}}" wx:key="funcSwiper">
       <swiper-item>
         <view class="menu-content">
-          <block wx:for="{{menuItems}}">
-            <view class="menu-item">
+          <block wx:for="{{menuItems}}"wx:key="funcItems">
+            <view class="menu-item" id="{{item.funcName}}" bindtap="tapFunc">
               <view class="menu-item-img">
                 <image src="{{item.imagePath}}"></image>
               </view>

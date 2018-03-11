@@ -1,0 +1,43 @@
+<!--pages/index/cj/cj.wxml-->
+<view class="container">
+  <view class="grades-content">
+    <view class="page__bd">
+      <view class="weui-btn-area">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{xn}}">
+          <button type="default">选择学年</button>
+        </picker>
+      </view>
+      <view class="grades-list" wx:for="{{grade}}" wx:key="{{grade-item}}">
+        <view class="weui-form-preview grade-item">
+          <view class="weui-form-preview__hd grade-item-header">
+            <view class="weui-form-preview__item grade-kcm">
+              <view class="weui-form-preview__label kcm-title">课程名称</view>
+              <view class="weui-form-preview__value_in-hd kcm-content">{{item.kcmc}}</view>
+            </view>
+          </view>
+          <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item grade-xq">
+              <view class="weui-form-preview__label">学期</view>
+              <view class="weui-form-preview__value">{{item.xq}}</view>
+            </view>
+            <view class="weui-form-preview__item grade-cj">
+              <view class="weui-form-preview__label">成绩</view>
+              <view class="weui-form-preview__value">{{item.cj}}</view>
+            </view>
+            <view class="weui-form-preview__item grade-xf">
+              <view class="weui-form-preview__label">学分</view>
+              <view class="weui-form-preview__value">{{item.xf}}</view>
+            </view>
+            <view class="weui-form-preview__item grade-kcxz">
+              <view class="weui-form-preview__label">课程性质</view>
+              <view class="weui-form-preview__value">{{item.kcxz}}</view>
+            </view>
+          </view>
+          <!-- <view class="weui-form-preview__ft">
+          <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">操作</navigator>
+        </view>-->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
