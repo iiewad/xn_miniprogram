@@ -1,0 +1,48 @@
+<!--pages/index/df/df.wxml-->
+<view class="container">
+  <view class="page">
+    <view class="page__bd">
+      <view class="section">
+        <picker mode="date" value="{{date}}" fields="month" start="2013-09-01" end="2018-09-01" bindchange="bindDateChange">
+          <view class="label"><label>日期</label></view>
+          <view class="picker">
+            {{currentDate.year + '年' + currentDate.month + '月'}}
+          </view>
+        </picker>
+      </view>
+      <view class="section">
+        <picker bindchange="bindApartmentChange" data-name="apartment" value="{{index}}" range="{{apartmentList}}" range-key="{{'dormname'}}">
+          <view class="label"><label>公寓</label></view>
+          <view class="picker">
+            {{currentApart.dormname}}
+          </view>
+        </picker>
+      </view>
+      <view class="section">
+        <picker bindchange="bindBuildChange" data-name="build" value="{{index}}" range="{{buildList}}" range-key="{{'dormname'}}">
+          <view class="label"><label>楼栋</label></view>
+          <view class="picker">
+            {{currentBuild.dormname}}
+          </view>
+        </picker>
+      </view>
+      <view class="section">
+        <picker bindchange="bindFloorChange" data-name="floor" value="{{index}}" range="{{floorList}}" range-key="{{'dormname'}}">
+          <view class="label"><label>楼层</label></view>
+          <view class="picker">
+            {{currentFloor.dormname}}
+          </view>
+        </picker>
+      </view>
+      <view class="section">
+        <picker bindchange="bindRoomChange" data-name="room" value="{{index}}" range="{{roomList}}" range-key="{{'dormname'}}">
+          <view class="label"><label>房间</label></view>
+          <view class="picker">
+            {{currentRoom.dormname}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <button bindtap="getDf" data-params="energyQuery">查询</button>
+  </view>
+</view>

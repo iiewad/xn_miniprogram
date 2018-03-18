@@ -21,6 +21,10 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
@@ -50,6 +54,18 @@
 					"id": -1,
 					"name": "cj",
 					"pathName": "pages/index/cj/cj",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df",
+					"pathName": "pages/index/df/df",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df_success",
+					"pathName": "pages/index/df/msg_success",
 					"query": ""
 				}
 			]
