@@ -22,7 +22,7 @@ Page({
   },
   getStuGrades: function (stuNumber, stuCardCode) {
     wx.request({
-      url: 'http://xnqn.lidawei.me/api/grade',
+      url: 'https://api.hunau.club/api/grade',
       data: {
         stuNumber: stuNumber,
         stuCardCode: stuCardCode

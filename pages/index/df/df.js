@@ -47,7 +47,7 @@ Page({
       params.QueryType = e.currentTarget.dataset.params
     }
     wx.request({
-      url: 'http://hunau.club/api/get_energy_query',
+      url: 'https://api.hunau.club/api/get_energy_query',
       data: {
         userId: params.userId,
         Room: params.Room,
@@ -129,7 +129,7 @@ Page({
   },
   getRoomList: function (priDormId, addressType) {
     wx.request({
-      url: 'http://hunau.club/api/get_rooms?priDormId=' + priDormId,
+      url: 'https://api.hunau.club/api/get_rooms?priDormId=' + priDormId,
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值

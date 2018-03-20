@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -66,6 +66,12 @@
 					"id": -1,
 					"name": "df_success",
 					"pathName": "pages/index/df/msg_success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "kb",
+					"pathName": "pages/index/kb/kb",
 					"query": ""
 				}
 			]

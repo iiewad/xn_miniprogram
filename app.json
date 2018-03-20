@@ -8,6 +8,7 @@
     "pages/index/cj/cj",
     "pages/index/df/df",
     "pages/index/df/msg_success",
+    "pages/index/kb/kb",
     "pages/logs/logs"
   ],
   "tabBar": {
