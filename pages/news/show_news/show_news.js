@@ -15,7 +15,7 @@ Page({
   },
   getNews: function (news_id) {
     wx.request({
-      url: 'http://xnqn.lidawei.me/api/news/' + news_id,
+      url: 'https://api.hunau.club/api/news/' + news_id,
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值

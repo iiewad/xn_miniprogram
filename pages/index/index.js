@@ -25,7 +25,7 @@ Page({
       {
         name: '一卡通',
         imagePath: '../../images/menu-card.png',
-        funcName: 'xyk'
+        funcName: 'ykt'
       },
       {
         name: '图书查询',

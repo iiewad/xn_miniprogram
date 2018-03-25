@@ -37,7 +37,7 @@ Page({
   getNewsInfo: function (current_page = 1) {
     console.log('Get News Info Start')
     wx.request({
-      url: 'http://xnqn.lidawei.me/api/news' + '?page=' + current_page,
+      url: 'https://api.hunau.club/api/news' + '?page=' + current_page,
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值

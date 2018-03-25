@@ -1,0 +1,67 @@
+<!--pages/index/ykt/showBrows.wxml-->
+<view class="container">
+
+  <block wx:if="{{browsData}}">
+    <scroll-view class="brows-list" scroll-y bindscrolltolower="lowerLoad" enable-back-to-top scroll-with-animation>
+      <view class="brows-item" bindtap="showPopup" data-index="{{index}}" wx:for="{{browsData}}" wx:key="brows">
+        <view class="brows-item-top">
+          <text class="title">{{item.tranname}}</text>
+          <text class="consume"> 💸  {{item.FTranAmt}}</text>
+        </view>
+        <view class="brows-item-bottom">
+          <text class="balance"> 💰  {{item.FCardBalance}}</text>
+          <text class="date"> {{item.effectdate}}</text>
+        </view>
+      </view>
+      <view class="weui-loadmore" wx:if="{{!loadmorehidden}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+      <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot" wx:else>
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+      </view>
+    </scroll-view>
+  </block>
+  <block wx:else>
+    <view class="no-brows">
+      <view class="emoji"> 🙂️ </view>
+    </view>
+  </block>
+
+  <wxc-popup class="J_Popup" animation-mode="right" align="center">
+    <view class="popup__content">
+      <view class="popup-title">
+        交易明细
+      </view>
+      <view class="popup-item">
+        <label>时间</label>
+        {{popupbrow.jndatetime}}
+      </view>
+      <view class="popup-item">
+        <label>类型</label>
+        {{popupbrow.tranname}}
+      </view>
+      <view class="popup-item">
+        <label>💸</label>
+        {{popupbrow.FTranAmt}}
+      </view>
+      <view class="popup-item">
+        <label>💰</label>
+        {{popupbrow.FCardBalance}}
+      </view>
+      <view class="popup-item">
+        <label>电子账户名称</label>
+        {{popupbrow.accname}}
+      </view>
+      <view class="popup-item">
+        <label>子系统名称</label>
+        {{popupbrow.sysname1}}
+      </view>
+      <view class="popup-item">
+        <label>pos编号</label>
+        {{popupbrow.poscode}}
+      </view>
+    </view>
+  </wxc-popup>
+
+</view>

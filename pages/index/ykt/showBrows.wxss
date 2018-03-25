@@ -1,0 +1,93 @@
+/* pages/index/ykt/showBrows.wxss */
+
+.brows-list {
+  width: 95%;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.no-brows {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  line-height: 200rpx;
+  font-size: 80rpx
+}
+
+.no-brows .emoji {
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+  top: 30%;
+}
+
+.brows-item {
+  width: 100%;
+  height: 130rpx;
+  background-color: #35ce8d;
+  font-size: 32rpx;
+  padding: 10rpx 0;
+  border-radius: 20rpx;
+  box-shadow: 1px 0px 2px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 20rpx 0;
+}
+
+.brows-item-top, .brows-item-bottom {
+  width: 100%;
+  height: 50%;
+  line-height: 60rpx;
+  color: #333333;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #000000;
+}
+
+.title, .balance {
+  float: left;
+  width: 30%;
+  margin-left: 30rpx;
+}
+
+.consume, .date {
+  float: right;
+  width: 50%;
+  text-align: right;
+  margin-right: 30rpx;
+}
+
+.popup__content {
+  width: 80%;
+  height: 750rpx;
+  line-height: 300rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  text-align: center;
+}
+
+.popup__content .popup-title {
+  height: 60rpx;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.popup__content .popup-item {
+  height: 60rpx;
+  text-align: right;
+  margin-top: 15rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.popup-item label {
+  float: left;
+  text-align: left;
+  height: 60rpx;
+}

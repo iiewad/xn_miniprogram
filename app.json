@@ -9,6 +9,8 @@
     "pages/index/df/df",
     "pages/index/df/msg_success",
     "pages/index/kb/kb",
+    "pages/index/ykt/ykt",
+    "pages/index/ykt/showBrows",
     "pages/logs/logs"
   ],
   "tabBar": {
