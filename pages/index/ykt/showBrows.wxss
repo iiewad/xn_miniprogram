@@ -67,27 +67,37 @@
 
 .popup__content {
   width: 80%;
-  height: 750rpx;
+  height: 700rpx;
   line-height: 300rpx;
-  background: #fff;
+  background: #EFEBD9;
   border-radius: 12rpx;
   text-align: center;
+  color: #04384A;
+  font-size: 32rpx;
 }
 
 .popup__content .popup-title {
   height: 60rpx;
   text-align: center;
   margin-bottom: 30rpx;
+  margin-top: 15rpx;
+  line-height: 60rpx;
+  font-weight: bold;
 }
 .popup__content .popup-item {
-  height: 60rpx;
+  width: 90%;
+  height: 70rpx;
   text-align: right;
-  margin-top: 15rpx;
+  margin: 15rpx auto;
   padding-left: 20rpx;
   padding-right: 20rpx;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 70rpx;
+  border-radius: 15rpx;
 }
 .popup-item label {
   float: left;
   text-align: left;
-  height: 60rpx;
+  height: 70rpx;
+  font-weight: bold;
 }
