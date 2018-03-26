@@ -41,14 +41,16 @@ input {
   margin-top: 50rpx;
 }
 
-.lost {
-  width: 100rpx;
-  height: 100rpx;
-  font-size: 68rpx;
-  line-height: 100rpx;
-  text-align: center;
-  position: absolute;
-  bottom: 15%;
-  right: 5%;
+.loss {
+  width: 85%;
+  border: none;
+  background-color: #D11C16;
+  color: #eff1f3;
+  margin-top: 50rpx;
 }
 
+.input {
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
+  padding: 5px;
+}
