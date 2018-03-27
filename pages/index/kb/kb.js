@@ -1,4 +1,6 @@
 // pages/index/kb/kb.js
+const app = getApp()
+
 export default Component({
   data: {
     tabs: [
@@ -89,7 +91,7 @@ export default Component({
       queryParams.weeks = this.data.currentWeek.id;
 
       const tabRes = wx.request({
-        url: 'https://api.hunau.club/api/get_timetable',
+        url: app.globalData.url + '/api/get_timetable',
         data: {
           Id: queryParams.Id,
           Term: queryParams.Term,
@@ -139,7 +141,7 @@ export default Component({
     getTerm: function () {
       console.log('Start Get Term');
       wx.request({
-        url: 'https://api.hunau.club/api/get_term',
+        url: app.globalData.url + '/api/get_term',
         header: {
           "accept": "application/vnd.api+json;version=1",
           'content-type': 'application/json' // 默认值

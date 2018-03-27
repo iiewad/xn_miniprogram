@@ -1,4 +1,6 @@
 // pages/index/jy/jy.js
+const app = getApp()
+
 Page({
 
   /**
@@ -17,7 +19,7 @@ Page({
 
   requestBorrow: function (cardcode) {
     wx.request({
-      url: 'http://localhost:3030/api/get_borrow',
+      url: app.globalData.url + '/api/get_borrow',
       data: {
         cardcode: cardcode,
         pageindex: 0,

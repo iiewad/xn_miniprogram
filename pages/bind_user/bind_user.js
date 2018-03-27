@@ -51,7 +51,7 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           wx.request({
-            url: 'https://api.hunau.club/api/bind-stu-user', //仅为示例，并非真实的接口地址
+            url: app.globalData.url + '/api/bind-stu-user', //仅为示例，并非真实的接口地址
             data: {
               'stu_user[stu_number]': stu_user.stu_number,
               'stu_user[stu_password]': stu_user.stu_password,

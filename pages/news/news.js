@@ -1,4 +1,6 @@
 // pages/news/news.js
+const app = getApp()
+
 Page({
   data: {
     news_list: {},
@@ -37,7 +39,7 @@ Page({
   getNewsInfo: function (current_page = 1) {
     console.log('Get News Info Start')
     wx.request({
-      url: 'https://api.hunau.club/api/news' + '?page=' + current_page,
+      url: app.globalData.url + '/api/news' + '?page=' + current_page,
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值

@@ -30,7 +30,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    url: 'https://api.hunau.club'
   },
   towxml: new Towxml()
 })

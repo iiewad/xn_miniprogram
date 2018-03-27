@@ -36,7 +36,7 @@ Page({
 
   requestBrows: function (queryParams) {
     wx.request({
-      url: 'https://api.hunau.club/api/get_brows',
+      url: app.globalData.url + '/api/get_brows',
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值

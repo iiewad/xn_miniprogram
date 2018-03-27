@@ -1,4 +1,6 @@
 // pages/index/cj/cj.js
+const app = getApp()
+
 Page({
   data: {
     xn: {},
@@ -22,7 +24,7 @@ Page({
   },
   getStuGrades: function (stuNumber, stuCardCode) {
     wx.request({
-      url: 'https://api.hunau.club/api/grade',
+      url: app.globalData.url + '/api/grade',
       data: {
         stuNumber: stuNumber,
         stuCardCode: stuCardCode

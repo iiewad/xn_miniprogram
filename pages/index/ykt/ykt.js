@@ -1,4 +1,5 @@
 // pages/index/ykt/ykt.js
+const app = getApp()
 
 Page({
   data: {
@@ -25,7 +26,7 @@ Page({
     params.pwd = this.data.lossPassword;
     console.log(params);
     wx.request({
-      url: 'https://api.hunau.club/api/loss',
+      url: app.globalData.url + '/api/loss',
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值
@@ -89,7 +90,7 @@ Page({
 
   requestBrows: function (queryParams) {
     wx.request({
-      url: 'https://api.hunau.club/api/get_brows',
+      url: app.globalData.url + '/api/get_brows',
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值
@@ -147,7 +148,7 @@ Page({
 
   getTranItems: function () {
     wx.request({
-      url: 'https://api.hunau.club/api/tran_items',
+      url: app.globalData.url + '/api/tran_items',
       header: {
         "accept": "application/vnd.api+json;version=1",
         'content-type': 'application/json' // 默认值
