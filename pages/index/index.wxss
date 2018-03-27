@@ -13,7 +13,7 @@
 .swiper-menu .menu-content {
   width: 100%;
   background: #fff;
-  min-height: 365rpx;
+  min-height: 185rpx;
   border-bottom: 1rpx solid #e5e5e5;
   overflow: hidden;
 }

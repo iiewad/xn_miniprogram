@@ -1,4 +1,6 @@
 // pages/index/ykt/showBrows.js
+const app = getApp()
+
 Page({
   data: {
     browsOverView: {},
