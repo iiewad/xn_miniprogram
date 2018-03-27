@@ -18,9 +18,9 @@ Page({
         funcName: 'kb'
       },
       {
-        name: '损坏保修',
-        imagePath: '../../images/menu-maintain.png',
-        funcName: 'bx'
+        name: '借阅信息',
+        imagePath: '../../images/menu-borrow-books.png',
+        funcName: 'jy'
       },
       {
         name: '一卡通',
@@ -33,9 +33,9 @@ Page({
         funcName: 'ts'
       },
       {
-        name: '借阅信息',
-        imagePath: '../../images/menu-borrow-books.png',
-        funcName: 'jy'
+        name: '损坏保修',
+        imagePath: '../../images/menu-maintain.png',
+        funcName: 'bx'
       },
       {
         name: '空教室',

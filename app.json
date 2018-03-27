@@ -11,6 +11,7 @@
     "pages/index/kb/kb",
     "pages/index/ykt/ykt",
     "pages/index/ykt/showBrows",
+    "pages/index/jy/jy",
     "pages/logs/logs"
   ],
   "tabBar": {
