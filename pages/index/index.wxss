@@ -6,7 +6,7 @@
   position: fixed;
 }
 .swiper-menu {
-  height: 365rpx;
+  height: 185rpx;
   padding: 15rpx 10rpx 10rpx;
 }
 
@@ -41,5 +41,26 @@
   display: block;
   width: 65rpx;
   height: 65rpx;
-  margin: 10rpx auto;
+  margin: 6rpx auto;
+}
+
+.feature-content {
+  width: 100%;
+}
+.feature-content .today-kb, .today-news, .today-borw {
+  width: 95%;
+  height: 150rpx;
+  margin: 20rpx auto;
+  background: #EFF1F3;
+  border-radius: 10rpx;
+  box-shadow: 1px 0px 2px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-sizing: border-box;
+}
+
+.today-kb {
+  background: #F46D78;
+}
+
+.today-news {
+  background: #0B90AA;
 }

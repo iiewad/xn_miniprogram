@@ -18,4 +18,11 @@
     </block>
   </swiper>
 
+  <view class="feature-content">
+    <view class="today-kb"></view>
+    <view class="today-cj"></view>
+    <view class="today-news"></view>
+    <view class="today-borw"></view>
+  </view>
+
 </view>
