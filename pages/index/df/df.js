@@ -1,5 +1,6 @@
 // pages/index/df/df.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js');
 
 Page({
   data: {
@@ -14,7 +15,9 @@ Page({
     currentDate: {
       year: '',
       month: ''
-    }
+    },
+    energyQuery: '',
+    surplusQuery: ''
   },
   openSuccess: function () {
     wx.navigateTo({
@@ -23,22 +26,22 @@ Page({
   },
   setQuery(query, queryType) {
     if (queryType == 'energyQuery') {
-      wx.setStorageSync('energyQuery', query);
+      this.setData({
+        energyQuery: query
+      });
       this.getDf('surplusQuery');
       return;
-    } else if ( (queryType == 'surplusQuery') && (wx.getStorageSync('surplusQuery') == "") ) {
-      wx.setStorageSync('surplusQuery', query)
+    } else if ( (queryType == 'surplusQuery') && (this.data.surplusQuery == "") ) {
+      this.setData({
+        surplusQuery: query
+      })
     }
     this.openSuccess();
   },
   getDf: function (e) {
-    wx.showToast({
-      title: '稍等片刻',
-      icon: 'loading',
-      duration: 3000
-    });
-
+    var that = this;
     var userInfo = wx.getStorageSync('stu_userinfo');
+    var url = app.globalData.url + '/api/get_energy_query';
     var params = {};
     params.userId = userInfo.cardcode;
     params.Room = this.data.currentRoom.dormid;
@@ -48,23 +51,13 @@ Page({
     } else {
       params.QueryType = e.currentTarget.dataset.params
     }
-    wx.request({
-      url: app.globalData.url + '/api/get_energy_query',
-      data: {
-        userId: params.userId,
-        Room: params.Room,
-        Time: params.Time,
-        queryType: params.QueryType
-      },
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: res => {
-        this.setQuery(res.data.data, params.QueryType);
-        return true;
-      }
-    });
+    util.requestQuery(url, params, 'GET', function(res) {
+      that.setQuery(res.data.data, params.QueryType);
+    }, function(res) {
+      console.log('------Failed--------')
+    }, function(res) {
+      console.log('------Complete-------')
+    })
   },
   bindDateChange: function (e) {
     console.log(e);
@@ -130,22 +123,21 @@ Page({
     }
   },
   getRoomList: function (priDormId, addressType) {
-    wx.request({
-      url: app.globalData.url + '/api/get_rooms?priDormId=' + priDormId,
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: res => {
-        this.setRoomList(res.data.roomList, addressType);
-        return true;
-      }
-    })
+    var that = this;
+    var url_str = app.globalData.url + '/api/get_rooms';
+    var params = {};
+    params.priDormId = priDormId;
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      console.log(res.data);
+      that.setRoomList(res.data.roomList, addressType);
+      return true;
+    }, function(res) {
+      console.log('---------Failed--------');
+    }, function(res) {
+      console.log('---------Complete--------')
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var priDormId = '';
     this.getRoomList(priDormId, 'apartment');

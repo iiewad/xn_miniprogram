@@ -1,5 +1,6 @@
 // pages/index/cj/cj.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js')
 
 Page({
   data: {
@@ -7,13 +8,7 @@ Page({
     grades: {},
     grade: {}
   },
-  setStuGrades: function (grades) {
-    console.log('Start Set StuGrades');
-    this.setData({
-      xn: Object.keys(grades),
-      grades: grades
-    });
-  },
+
   bindPickerChange: function (e) {
     var pickerValue = e.detail.value;
     var currentXN = this.data.xn[pickerValue];
@@ -22,21 +17,22 @@ Page({
       grade: grade
     });
   },
-  getStuGrades: function (stuNumber, stuCardCode) {
-    wx.request({
-      url: app.globalData.url + '/api/grade',
-      data: {
-        stuNumber: stuNumber,
-        stuCardCode: stuCardCode
-      },
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: res => {
-        this.setStuGrades(res.data.grades);
-        return true;
-      }
+  setStuGrades: function (stuNumber, stuCardCode) {
+    var that = this;
+    var url = app.globalData.url + '/api/grade';
+    var params = {};
+    params.stuNumber = stuNumber;
+    params.stuCardCode = stuCardCode;
+    util.requestQuery(url, params, 'GET', function(res) {
+      console.log(res.data);
+      that.setData({
+        xn: Object.keys(res.data.grades),
+        grades: res.data.grades
+      })
+    }, function(res) {
+      console.log('Failed');
+    }, function(res) {
+      console.log('Complete')
     })
   },
 
@@ -47,7 +43,7 @@ Page({
     var stuInfo = wx.getStorageSync('stu_userinfo');
     var stuNumber = stuInfo.schno;
     var stuCardCode = stuInfo.cardcode;
-    this.getStuGrades(stuNumber, stuCardCode);
+    this.setStuGrades(stuNumber, stuCardCode);
   },
 
   /**

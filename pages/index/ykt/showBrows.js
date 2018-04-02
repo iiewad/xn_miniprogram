@@ -1,5 +1,6 @@
 // pages/index/ykt/showBrows.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js')
 
 Page({
   data: {
@@ -36,21 +37,18 @@ Page({
     })
   },
 
-  requestBrows: function (queryParams) {
-    wx.request({
-      url: app.globalData.url + '/api/get_brows',
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      data: {
-        queryParams: queryParams
-      },
-      success: res => {
-        this.setBrows(res)
-        return true;
-      }
-    })
+  requestBrows: function (params) {
+    var that = this;
+    var url_str = app.globalData.url + '/api/get_brows';
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      console.log('Success');
+      that.setBrows(res);
+      return true;
+    }, function(res) {
+      console.log('Failed');
+    }, function(res) {
+      console.log('Complete');
+    });
   },
 
   lowerLoad: function () {
@@ -62,7 +60,7 @@ Page({
         console.log('This is a repeat Request')
         return false;
       }
-      params.session = this.data.browsSession;
+      params.SessionId = this.data.browsSession;
       params.pageNum = pages.pageNum;
       params.pageSize = pages.pageSize;
       params.pageindex = pages.pageNum;

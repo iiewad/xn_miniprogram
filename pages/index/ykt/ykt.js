@@ -1,5 +1,6 @@
 // pages/index/ykt/ykt.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js')
 
 Page({
   data: {
@@ -20,28 +21,23 @@ Page({
   },
 
   requestLoss: function() {
-    var params = {};
-    params.id = this.data.userinfo.cardcode;
-    params.CardId = this.data.userinfo.schno;
-    params.pwd = this.data.lossPassword;
-    console.log(params);
-    wx.request({
-      url: app.globalData.url + '/api/loss',
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      data: {
-        queryParams: params
-      },
-      success: res => {
-        this.setData({
-          lossRes: res.data.data
-        });
-        this.showPromptDialog();        
-        return true;
-      }
-    })
+    var that = this;
+    var params = {
+      id: this.data.userinfo.cardcode,
+      CardId: this.data.userinfo.schno,
+      pwd: this.data.lossPassword
+    };
+    var url_str = app.globalData.url + '/api/loss';
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      that.setData({
+        lossRes: res.data.data
+      });
+      that.showPromptDialog();
+    }, function(res) {
+      console.log('-----Failed-------')
+    }, function(res) {
+      console.log('-------Complete------')
+    });
   },
 
   showPromptDialog() {
@@ -88,25 +84,21 @@ Page({
     });
   },
 
-  requestBrows: function (queryParams) {
-    wx.request({
-      url: app.globalData.url + '/api/get_brows',
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      data: {
-        queryParams: queryParams
-      },
-      success: res => {
-        this.setBrows(res)
-        return true;
-      }
-    })
+  requestBrows: function (params) {
+    var that = this;
+    var url_str = app.globalData.url + '/api/get_brows';
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      console.log(res.data.data);
+      that.setBrows(res);
+      return true;
+    }, function(res) {
+      console.log('Failed');
+    }, function(res) {
+      console.log('Complete');
+    });
   },
 
   queryBrows: function () {
-    const util = require('../../../utils/util.js');
     var params = {};
     var brows = {};
     params.cardid = this.data.userinfo.schno;
@@ -147,24 +139,22 @@ Page({
   },
 
   getTranItems: function () {
-    wx.request({
-      url: app.globalData.url + '/api/tran_items',
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: res => {
-        this.setTranItems(res.data.data);
-        return true;
-      }
-    })
+    var that = this;
+    var url_str = app.globalData.url + '/api/tran_items';
+    var params = {};
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      that.setTranItems(res.data.data);
+    }, function(res) {
+      console.log('------Failed--------')
+    }, function(res) {
+      console.log('-------Complete--------')
+    });
   },
 
   onLoad: function (options) {
     var date = new Date();
     var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     var userinfo = wx.getStorageSync('stu_userinfo');
-    const util = require('../../../utils/util.js');
     today = util.formatDate(new Date(today), '-');
     this.setData({
       endDate: today,

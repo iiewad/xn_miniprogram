@@ -25,7 +25,30 @@ const formatDate = (date, formatChar) => {
   }
 }
 
+const requestQuery = (url, data, method, success, fail, complete) => {
+  wx.request({
+    url: url,
+    data: data,
+    method: method,
+    header: {
+      "accept": "application/vnd.api+json;version=1",
+      'content-type': 'application/json' // 默认值
+    },
+    success: function(res) {
+      success(res);
+    },
+    fail: function(res) {
+      fail(res);
+    },
+    complete: function(res) {
+      complete(res);
+    }
+  })
+  console.log("-----------End ------ Request ---------")
+}
+
 module.exports = {
   formatTime: formatTime,
-  formatDate: formatDate
+  formatDate: formatDate,
+  requestQuery: requestQuery
 }

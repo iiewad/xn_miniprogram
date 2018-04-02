@@ -1,7 +1,7 @@
 <!--pages/index/jy/jy.wxml-->
 <view class="container">
   <view class="borrow-list">
-    <view class="borrow-item" wx:for="{{borrowInfo}}">
+    <view class="borrow-item" wx:for="{{borrowInfo}}" wx:key="brows">
       <view class="borrow-book-name">
         <label>书名</label>
         {{item.ShuName}}

@@ -1,11 +1,8 @@
 // pages/index/jy/jy.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js');
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     userInfo: '',
     borrowInfo: ''
@@ -18,27 +15,24 @@ Page({
   },
 
   requestBorrow: function (cardcode) {
-    wx.request({
-      url: app.globalData.url + '/api/get_borrow',
-      data: {
-        cardcode: cardcode,
-        pageindex: 0,
-        pagesize: 20
-      },
-      header: {
-        "accept": "application/vnd.api+json;version=1",
-        'content-type': 'application/json' // 默认值
-      },
-      success: res => {
-        console.log(res.data.data);
-        this.setBorrowInfo(res.data.data);
-        return true;
-      }
+    var that = this;
+    var url_str = app.globalData.url + '/api/get_borrow';
+    var params = {
+      cardcode: cardcode,
+      pageindex: 0,
+      pagesize: 20
+    };
+
+    util.requestQuery(url_str, params, 'GET', function(res) {
+      console.log(res.data.data);
+      that.setBorrowInfo(res.data.data);
+    }, function(res) {
+      console.log('Request Failed');
+    }, function(res) {
+      console.log('Request Complete');
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     var userInfo = wx.getStorage({
       key: 'stu_userinfo',

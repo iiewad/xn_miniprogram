@@ -1,5 +1,6 @@
 // pages/index/kb/kb.js
-const app = getApp()
+const app = getApp();
+const util = require('../../../utils/util.js');
 
 export default Component({
   data: {
@@ -28,8 +29,8 @@ export default Component({
       var friTable = [];
       var satTable = [];
       var sunTable = [];
-      for(var i = 0, len = tableRes.length; i < len; i++) {
-        if(tableRes[i].section == "星期一") {
+      for (var i = 0, len = tableRes.length; i < len; i++) {
+        if (tableRes[i].section == "星期一") {
           monTable.push(tableRes[i]);
         } else if (tableRes[i].section == "星期二") {
           tueTable.push(tableRes[i]);
@@ -85,33 +86,27 @@ export default Component({
 
     getTimetable: function () {
       console.log('Start Get TimeTables')
-      var queryParams = {};
-      queryParams.Id = wx.getStorageSync('stu_userinfo').cardcode; //"20150902233720207";
-      queryParams.Term = this.data.currentTerm.class_year + this.data.currentTerm.class_term;
-      queryParams.weeks = this.data.currentWeek.id;
+      var that = this;
+      var params = {};
+      params.Id = wx.getStorageSync('stu_userinfo').cardcode; //"20150902233720207";
+      params.Term = this.data.currentTerm.class_year + this.data.currentTerm.class_term;
+      params.weeks = this.data.currentWeek.id;
+      var url_str = app.globalData.url + '/api/get_timetable';
 
-      const tabRes = wx.request({
-        url: app.globalData.url + '/api/get_timetable',
-        data: {
-          Id: queryParams.Id,
-          Term: queryParams.Term,
-          weeks: queryParams.weeks
-        },
-        header: {
-          "accept": "application/vnd.api+json;version=1",
-          'content-type': 'application/json' // 默认值
-        },
-        success: res => {
-          this.setTimetable(res.data.data);
-          return true;
-        }
+      util.requestQuery(url_str, params, 'GET', function (res) {
+        console.log(res.data);
+        that.setTimetable(res.data.data);
+      }, function (res) {
+        console.log('---------Failed--------');
+      }, function (res) {
+        console.log('--------Compliete------');
       });
     },
 
     setWeeks: function () {
       console.log('Start Set Weeks')
       var weeksData = this.buildWeeks()
-      if(this.data.currentWeek == '') {
+      if (this.data.currentWeek == '') {
         this.setData({
           currentWeek: {
             id: 1,
@@ -123,11 +118,11 @@ export default Component({
       this.setData({
         allWeeks: weeksData,
       });
-      this.getTimetable(weeksData); 
+      this.getTimetable(weeksData);
     },
 
     setTerm: function (termRes) {
-      console.log('Start Set TermData');      
+      console.log('Start Set TermData');
       termRes.forEach(function (element) {
         element.class_term_name = element.class_year + '年' + element.class_term + '学期';
       });
@@ -140,17 +135,15 @@ export default Component({
 
     getTerm: function () {
       console.log('Start Get Term');
-      wx.request({
-        url: app.globalData.url + '/api/get_term',
-        header: {
-          "accept": "application/vnd.api+json;version=1",
-          'content-type': 'application/json' // 默认值
-        },
-        success: res => {
-          this.setTerm(res.data.data);
-          return true;
-        }
-      })
+      var that = this;
+      var url_str = app.globalData.url + '/api/get_term';
+      util.requestQuery(url_str, '', 'GET', function (res) {
+        that.setTerm(res.data.data);
+      }, function (res) {
+        console.log('--------Failed--------');
+      }, function (res) {
+        console.log('--------Complete--------');
+      });
     },
 
     onClick: function (e) {
@@ -170,7 +163,7 @@ export default Component({
 
     onShow: function (options) {
     },
-    
+
     buildWeeks: function () {
       var currentWeeks = {};
       currentWeeks.begindate = this.data.currentTerm.begindate.substring(0, 4) + '-' + this.data.currentTerm.begindate.substring(4, 6) + '-' + this.data.currentTerm.begindate.substring(6, 8);
@@ -194,11 +187,9 @@ export default Component({
       var weeks = [];
       var weekCount = 0;
       var day_range = '';
-      var today = new Date();
-      today = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
+      var today = util.formatDate(new Date(), '-');
       for (var i = 0, len = dateArray.length; i < len; i += 7) {
         day_range = dateArray.slice(i, i + 7);
-
         if (day_range.includes(today)) {
           weeks[weekCount++] = {
             'week_name': '第' + weekCount + '周(当前)',
