@@ -77,7 +77,7 @@ Page({
                   url: '../me/me'
                 });
                 wx.setStorage({
-                  key: 'stu_userinfo',
+                  key: 'stuUserInfo',
                   data: res.data.userinfo
                 });
                 wx.showToast({

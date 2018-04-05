@@ -35,7 +35,7 @@ Page({
 
   onLoad: function (options) {
     var userInfo = wx.getStorage({
-      key: 'stu_userinfo',
+      key: 'stuUserInfo',
       success: res => {
         this.requestBorrow(res.data.cardcode);
         return true;

@@ -5,12 +5,14 @@
     <block wx:for="{{funcItems}}" wx:key="funcSwiper">
       <swiper-item>
         <view class="menu-content">
-          <block wx:for="{{menuItems}}"wx:key="funcItems">
-            <view class="menu-item" id="{{item.funcName}}" bindtap="tapFunc">
-              <view class="menu-item-img">
-                <image src="{{item.imagePath}}"></image>
-              </view>
-              <text>{{item.name}}</text>
+          <block wx:for="{{menuItems}}" wx:key="funcItems">
+            <navigator wx:if="{{funcEnabled && item.funcStatus}}" url="{{item.funcName + '/' + item.funcName}}" class="weui-grid menu-item">
+              <image class="weui-grid__icon" src="{{item.imagePath}}" />
+              <view class="weui-grid__label">{{item.name}}</view>
+            </navigator>
+            <view wx:else class="weui-grid menu-item-disable"  bindtap="tapFuncDisable" >
+              <image class="weui-grid__icon" src="{{item.imagePath}}" />
+              <view class="weui-grid__label">{{item.name}}</view>
             </view>
           </block>
         </view>
@@ -18,11 +20,11 @@
     </block>
   </swiper>
 
-  <view class="feature-content">
+  <!--<view class="feature-content">
     <view class="today-kb"></view>
     <view class="today-cj"></view>
     <view class="today-news"></view>
     <view class="today-borw"></view>
-  </view>
+  </view>-->
 
 </view>

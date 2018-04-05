@@ -1,47 +1,58 @@
 // pages/index/index.js
+const app=getApp();
+const util = require('../../utils/util.js');
+
 Page({
   data: {
     menuItems: [
       {
         name: '成绩查询',
         imagePath: '../../images/menu-grade.png',
-        funcName: 'cj'
+        funcName: 'cj',
+        funcStatus: true
       },
       {
         name: '电费查询',
         imagePath: '../../images/menu-energy-charge.png',
-        funcName: 'df'
+        funcName: 'df',
+        funcStatus: true
       },
       {
         name: '课表查询',
         imagePath: '../../images/menu-class-schedule.png',
-        funcName: 'kb'
+        funcName: 'kb',
+        funcStatus: true
       },
       {
         name: '借阅信息',
         imagePath: '../../images/menu-borrow-books.png',
-        funcName: 'jy'
+        funcName: 'jy',
+        funcStatus: true
       },
       {
         name: '一卡通',
         imagePath: '../../images/menu-card.png',
-        funcName: 'ykt'
-      }
-/*      {
+        funcName: 'ykt',
+        funcStatus: true
+      },
+      {
         name: '图书查询',
         imagePath: '../../images/menu-book.png',
-        funcName: 'ts'
+        funcName: 'ts',
+        funcStatus: false
       },
       {
         name: '损坏保修',
         imagePath: '../../images/menu-maintain.png',
-        funcName: 'bx'
+        funcName: 'bx',
+        funcStatus: false
       },
       {
         name: '空教室',
         imagePath: '../../images/menu-classroom.png',
-        funcName: 'js'
-      }*/
+        funcName: 'js',
+        funcStatus: false
+      }
     ],
     funcItems: [
       '1'
@@ -49,14 +60,12 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
+    loginFlag: false,
+    funcEnabled: false
   },
-  tapFunc: function (options) {
-    console.log(options)
-    var funcName = options.currentTarget.id;
-    wx.navigateTo({
-      url: funcName + '/' + funcName,
-    })
+  tapFuncDisable: function () {
+    console.log('未绑定用户信息')
   },
 
   changeIndicatorDots: function (e) {
@@ -83,12 +92,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.getStorage({
+      key: 'stuUserInfo',
+      success: function(res) {
+        that.setData({
+          loginFlag: true,
+          funcEnabled: true
+        });
+      },
+      fail: function() {
+        that.setData({
+          funcEnabled: false
+        });
+      }
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
 
   },

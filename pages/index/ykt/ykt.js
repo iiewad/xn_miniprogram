@@ -154,7 +154,7 @@ Page({
   onLoad: function (options) {
     var date = new Date();
     var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    var userinfo = wx.getStorageSync('stu_userinfo');
+    var userinfo = wx.getStorageSync('stuUserInfo');
     today = util.formatDate(new Date(today), '-');
     this.setData({
       endDate: today,

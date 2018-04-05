@@ -88,7 +88,7 @@ export default Component({
       console.log('Start Get TimeTables')
       var that = this;
       var params = {};
-      params.Id = wx.getStorageSync('stu_userinfo').cardcode; //"20150902233720207";
+      params.Id = wx.getStorageSync('stuUserInfo').cardcode; //"20150902233720207";
       params.Term = this.data.currentTerm.class_year + this.data.currentTerm.class_term;
       params.weeks = this.data.currentWeek.id;
       var url_str = app.globalData.url + '/api/get_timetable';

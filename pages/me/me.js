@@ -6,7 +6,7 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    stu_userInfo: {},
+    stuUserInfo: {},
     hasStuUserInfo: false
   },
   bindUserTap: function() {
@@ -59,7 +59,7 @@ Page({
   },
   getStuUserInfo: function(e) {
     wx.getStorage({
-      key: 'stu_userinfo',
+      key: 'stuUserInfo',
       success: res => {
         this.setStuUserInfo(res.data);
       },
@@ -68,12 +68,10 @@ Page({
       }
     });
   },
-  setStuUserInfo: function(e) {
-    console.log(e)
+  setStuUserInfo: function(stuUserInfo) {
     this.setData({
-      stu_userInfo: e,
+      stuUserInfo: stuUserInfo,
       hasStuUserInfo: true
     });
-
   }
 })

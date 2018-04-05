@@ -40,7 +40,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var stuInfo = wx.getStorageSync('stu_userinfo');
+    var stuInfo = wx.getStorageSync('stuUserInfo');
     var stuNumber = stuInfo.schno;
     var stuCardCode = stuInfo.cardcode;
     this.setStuGrades(stuNumber, stuCardCode);
