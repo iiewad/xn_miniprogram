@@ -47,14 +47,15 @@ export default Component({
         }
       }
       this.setData({
-        timetable: [
-          { week_id: 0, course: sunTable },
-          { week_id: 1, course: monTable },
-          { week_id: 2, course: tueTable },
-          { week_id: 3, course: wenTable },
-          { week_id: 4, course: thrTable },
-          { week_id: 5, course: friTable },
-          { week_id: 6, course: satTable }
+        // timetable: [
+        tabs: [
+          { week_id: 0, week_day: '日', course: sunTable },
+          { week_id: 1, week_day: '一', course: monTable },
+          { week_id: 2, week_day: '二', course: tueTable },
+          { week_id: 3, week_day: '三', course: wenTable },
+          { week_id: 4, week_day: '四', course: thrTable },
+          { week_id: 5, week_day: '五', course: friTable },
+          { week_id: 6, week_day: '六', course: satTable }
         ]
       })
     },
