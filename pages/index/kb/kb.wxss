@@ -1,10 +1,10 @@
-/* pages/index/kb/kb.wxss */
+@import '../../tpls/timetables/timetables.wxss';
 
-.picker{
-  background-color: #066FA5;
+.picker {
+  background-color: #066fa5;
   width: 100%;
   height: 80rpx;
-  color: #F4F4F4;
+  color: #f4f4f4;
   text-align: center;
   font-size: 40rpx;
   line-height: 80rpx;
@@ -21,11 +21,11 @@
   margin-top: 80rpx;
 }
 
-.kb-list {
+/* .kb-list {
   font-size: 32rpx;
-}
+} */
 
-.kb-item {
+/* .kb-item {
   width: 95%;
   height: 260rpx;
   background-color: #f1f1f1;
@@ -35,19 +35,19 @@
   padding: 30rpx;
 }
 
-.kb-time, kb-kc,  {
+/* .kb-time, kb-kc,  {
   text-align: center;
   font-size: 36rpx;
-}
+} 
 
 .kb-item label {
   color: #000000;
 }
 .kb-item text {
   padding-left: 30rpx;
-}
+} */
 
-.null-kb {
+/* .null-kb {
   background-color: #ffffff;
   width: 95%;
   height: 60rpx;
@@ -63,4 +63,4 @@
   position: absolute;
   right: 100rpx;
   top: 15%;
-}
+} */
