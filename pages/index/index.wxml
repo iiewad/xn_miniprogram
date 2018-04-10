@@ -1,6 +1,6 @@
-<!--pages/index/index.wxml-->
-<view class="container">
+<import src="../tpls/timetables/timetables.wxml" />
 
+<view class="container">
   <swiper class="swiper-menu" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{funcItems}}" wx:key="funcSwiper">
       <swiper-item>
@@ -10,7 +10,7 @@
               <image class="weui-grid__icon" src="{{item.imagePath}}" />
               <view class="weui-grid__label">{{item.name}}</view>
             </navigator>
-            <view wx:else class="weui-grid menu-item-disable"  bindtap="tapFuncDisable" >
+            <view wx:else class="weui-grid menu-item-disable" bindtap="tapFuncDisable">
               <image class="weui-grid__icon" src="{{item.imagePath}}" />
               <view class="weui-grid__label">{{item.name}}</view>
             </view>
@@ -19,6 +19,16 @@
       </swiper-item>
     </block>
   </swiper>
+
+
+  <view class="timetable">
+    <view class="title">今天课表</view>
+    <template is="timetables" data="{{course:todayTable}}"></template>
+  </view>
+
+  <loading hidden="{{loadingHidden}}">
+    加载中
+  </loading>
 
   <!--<view class="feature-content">
     <view class="today-kb"></view>
