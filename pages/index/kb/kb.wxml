@@ -1,0 +1,47 @@
+<!--pages/index/kb/kb.wxml-->
+<view class="container">
+  <view class="picker">
+    <picker class="picker-xq" bindchange="bindTermPickerChange" value="{{index}}" range="{{term}}" range-key="{{'class_term_name'}}">
+      <view>{{currentTerm.class_term_name}}</view>
+    </picker>
+    <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}" range-key="{{'week_name'}}">
+      <view>{{currentWeek.week_name}}</view>
+    </picker>
+  </view>
+
+  <view class="week-tab">
+    <wxc-tab bind:tabchange="onClick" default-index="{{default_index}}" component-id="c2" animate="{{true}}" active-line-color="#11CD86" active-text-color="#11CD86">
+      <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" tab-index="{{index}}" wx:key="{{tab.courses}}" component-id="c2" label="{{tab.week_day}}">
+        <view class="kb-list" wx:if="{{timetable[tab.week_id].course != ''}}">
+          <view class="kb-item" wx:for="{{timetable[tab.week_id].course}}" wx:key="{{index}}">
+            <view class="kb-time">
+              <label>🕓</label>
+              <text> 第{{item.JieC}}</text>
+            </view>
+            <view class="kb-kc">
+              <label> 📖 </label>
+              <text>{{item.CourseName}}</text>
+            </view>
+            <view class="kb-bj">
+              <label> 👨‍🏫 </label>
+              <text>{{item.JSName}}</text>
+            </view>
+            <view class="kb-js">
+              <label> 🏠 </label>
+              <text>{{item.JiaoS}}</text>
+            </view>
+            <view class="kb-week">
+              <label> 📅 </label>
+              <text>{{item.weeks}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="null-kb" wx:else>
+           今天没有课
+           <text>😄</text>
+        </view>
+
+      </wxc-tab-panel>
+    </wxc-tab>
+  </view>
+</view>

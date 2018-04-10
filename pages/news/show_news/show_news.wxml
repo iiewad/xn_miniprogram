@@ -1,0 +1,15 @@
+<!--pages/news/show_news/show_news.wxml-->
+<import src="/towxml/entry.wxml"/>
+
+<view class="container">
+  <view class="page__bd">
+    <view class="weui-article news">
+      <view class="weui-article__h1 news-title">{{news.title}}</view>
+      <view class="news-summary">{{ news.summary }}</view>
+      <view class="news-adddate">发布时间：{{ news.addtime }}</view>
+      <view class="weui-article__section">
+        <template is="entry" data="{{...news.content}}"/>
+      </view>
+    </view>
+  </view>
+</view>

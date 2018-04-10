@@ -1,0 +1,25 @@
+<view class="container">
+
+
+  <view class="binduser-header">
+    <view class="binduser-info">
+      <image class="xnqn-logo" src="../../images/logo.png" background-size="cover"></image>
+      <text class="xnqn-des">校园服务权限认证</text>
+    </view>
+  </view>
+
+  <view class="binduser-form-view">
+    <form bindsubmit="formSubmit" class="bind-user-form">
+      <view class="stu-number-view">
+        <input name="stu_number" placeholder-class="stu_info_placeholder" placeholder="请输入学号" auto-focus />
+      </view>
+      <view class="stu-password-view">
+        <input name="stu_password" placeholder-class='stu_info_placeholder' type="password" placeholder="请输入密码" />
+      </view>
+      
+      <view class="btn-area form-button-view">
+        <button formType="submit" class="send-form-button">立即绑定</button>
+      </view>
+    </form>
+  </view>
+</view>

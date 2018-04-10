@@ -1,0 +1,65 @@
+.container {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.binduser-header {
+  background-color: #fff;
+  width: 100%;
+  height: 480rpx;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.binduser-info {
+  margin: 0 auto;
+  width: 100%;
+  height: 400rpx;
+  text-align: center;
+}
+
+.xnqn-logo {
+  float: left;
+  width: 188rpx;
+  height: 188rpx;
+  margin: 80rpx 40% 30rpx 40%;
+  border-radius: 50%;
+}
+
+.xnqn-des {
+  color: green;
+  padding-left: 36rpx;
+  margin-top: 20rpx;
+}
+
+.binduser-form-view {
+  margin-top: 100rpx;
+  width: 100%;
+  height: 700rpx;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.binduser-form-view .stu-number-view, .stu-password-view {
+  width: 70%;
+  height: 80rpx;
+  border-bottom: 1px solid green;
+  margin: 20rpx auto;
+}
+
+.stu_info_placeholder {
+  color: #333;
+}
+
+.form-button-view {
+  margin-top: 50rpx;
+  width: 100%;
+}
+
+.form-button-view .send-form-button {
+  width: 50%;
+  border: unset;
+  background: #47ad65;
+  color: #fff;
+}

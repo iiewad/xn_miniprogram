@@ -14,6 +14,41 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const formatDate = (date, formatChar) => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  if (formatChar != null) {
+    return [year, month, day].map(formatNumber).join(formatChar);
+  } else {
+    return [year, month, day].map(formatNumber).join('');
+  }
+}
+
+const requestQuery = (url, data, method, success, fail, complete) => {
+  wx.request({
+    url: url,
+    data: data,
+    method: method,
+    header: {
+      "accept": "application/vnd.api+json;version=1",
+      'content-type': 'application/json' // 默认值
+    },
+    success: function(res) {
+      success(res);
+    },
+    fail: function(res) {
+      fail(res);
+    },
+    complete: function(res) {
+      complete(res);
+    }
+  })
+  console.log("-----------End ------ Request ---------")
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  formatDate: formatDate,
+  requestQuery: requestQuery
 }

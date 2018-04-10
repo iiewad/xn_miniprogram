@@ -1,0 +1,56 @@
+/* pages/index/ykt/ykt.wxss */
+
+.container {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+}
+
+.ykt-layout {
+  padding-top: 50rpx;
+}
+
+input {
+  padding-left: 15%;
+}
+
+.form-item {
+  width: 80%;
+  height: 100rpx;
+  margin: 20rpx auto;
+  padding-left: 50rpx;
+  border: 1px solid #f3f3f3;
+  font-size: 38rpx;
+  line-height: 100rpx;
+  border-radius: 20rpx;
+}
+
+.picker {
+  color: #032030;
+}
+
+.picker text {
+  padding-left: 15%;
+}
+
+.query {
+  width: 85%;
+  border: none;
+  background-color: #1794a5;
+  color: #eff1f3;
+  margin-top: 50rpx;
+}
+
+.loss {
+  width: 85%;
+  border: none;
+  background-color: #D11C16;
+  color: #eff1f3;
+  margin-top: 50rpx;
+}
+
+.input {
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
+  padding: 5px;
+}

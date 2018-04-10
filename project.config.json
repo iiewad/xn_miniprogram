@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -21,13 +21,84 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "bind_user_page",
+					"pathName": "pages/bind_user/bind_user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "news",
+					"pathName": "pages/news/news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "show_news",
+					"pathName": "pages/news/show_news/show_news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "cj",
+					"pathName": "pages/index/cj/cj",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df",
+					"pathName": "pages/index/df/df",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df_success",
+					"pathName": "pages/index/df/msg_success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "kb",
+					"pathName": "pages/index/kb/kb",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "ykt",
+					"pathName": "pages/index/ykt/ykt",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "showBrows",
+					"pathName": "pages/index/ykt/showBrows",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "Brrows",
+					"pathName": "pages/index/jy/jy",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "showBrows",
+					"pathName": "pages/index/jy/jy",
+					"query": ""
+				}
+			]
 		}
 	}
 }

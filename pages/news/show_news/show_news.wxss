@@ -1,0 +1,14 @@
+/* pages/news/show_news/show_news.wxss */
+@import '/towxml/style/main.wxss';
+
+.news-title {
+  text-align: center;
+}
+
+.news-summary {
+  color: #333333;
+}
+
+image {
+  float: left;
+}

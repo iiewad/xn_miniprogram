@@ -1,0 +1,45 @@
+<!--pages/index/ykt/ykt.wxml-->
+<view class="container">
+  <view class="ykt-layout">
+    <view class="form-item">
+      <view class="picker form-schno">
+        👨‍🎓
+        <text>{{userinfo.schno}}</text>
+      </view>
+    </view>
+    <view class="section form-item">
+      <picker mode="date" value="{{beginDate}}" start="2014-09-01" end="{{beginDate}}" bindchange="bindBeginDateChange">
+        <view class="picker">
+          🕛
+          <text>{{ beginDate }}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="section form-item">
+      <picker mode="date" value="{{endDate}}" start="2014-09-01" end="{{endDate}}" bindchange="bindEndDateChange">
+        <view class="picker">
+          🕐
+          <text>{{ endDate }}</text>
+        </view>
+      </picker>
+    </view>
+    <view class="section form-item">
+      <picker bindchange="bindTranItemChange" value="{{index}}" range="{{tranItems}}" range-key="tranname">
+        <view class="picker">
+          💳
+          <text>{{tranItems[2].tranname}}</text>
+        </view>
+      </picker>
+    </view>
+    <button class="query" bindtap="queryBrows"> 查询 </button>
+    <button class="loss" bindtap="showLossDialog"> 挂失 </button>
+
+    <wxc-dialog class="wxc-loss-dialog" title="挂失" content=" 😠  请谨慎操作" confirm-text="确定" confirm-color="#D11C16" cancel-text="取消" bindconfirm="onLossConfirm" bindcancel="onLossCancel">
+    <input class="input" disabled="disabled" value="{{userinfo.schno}}" />
+    <input type="password" class="input" bindconfirm="setLossPassword" placeholder="请输入一卡通密码" />
+  </wxc-dialog>
+
+    <wxc-dialog class="wxc-prompt-dialog" title="提示" content="{{lossRes.Msg}}" confirm-text="确定" bindconfirm="onPromptConfirm" bindcancel="onPromptCancel"></wxc-dialog>
+
+  </view>
+</view>

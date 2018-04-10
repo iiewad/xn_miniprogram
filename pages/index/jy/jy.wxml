@@ -1,0 +1,27 @@
+<!--pages/index/jy/jy.wxml-->
+<view class="container">
+  <view class="borrow-list">
+    <view class="borrow-item" wx:for="{{borrowInfo}}" wx:key="brows">
+      <view class="borrow-book-name">
+        <label>书名</label>
+        {{item.ShuName}}
+      </view>
+      <view class="borrow-date">
+        <label>借书日期：</label>
+        {{item.jsrq}}
+      </view>
+      <view class="borrow-back">
+        <label>归还日期：</label>
+        {{item.yhrq}}
+      </view>
+      <view class="borrow-state">
+        <label>状态：</label>
+        {{item.lx}}
+      </view>
+      <view class="borrow-money">
+        <label>预付金额：</label>
+        {{item.yfje}}
+      </view>
+    </view>
+  </view>
+</view>
