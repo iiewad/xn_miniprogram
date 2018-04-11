@@ -9,17 +9,21 @@
     </picker>
 
     <!-- <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}" range-key="{{'week_name'}}"> -->
-    <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}">    
+    <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}">
       <view>{{selectedWeek}}</view>
     </picker>
   </view>
 
-   <view class="week-tab">
-     <wxc-tab default-index="{{currentDay}}" component-id="c2" animate="{{true}}" active-line-color="#11CD86" active-text-color="#11CD86"> 
-       <wxc-tab-panel wx:for="{{tabs}}" wx:key="" wx:for-item="tab" tab-index="{{index}}" component-id="c2" label="{{tab}}">
+  <view class="week-tab">
+    <wxc-tab default-index="{{currentDay}}" component-id="c2" animate="{{true}}" active-line-color="#11CD86" active-text-color="#11CD86">
+      <wxc-tab-panel wx:for="{{tabs}}" wx:key="" wx:for-item="tab" tab-index="{{index}}" component-id="c2" label="{{tab}}">
         <!-- 一天课表  -->
-         <template is="timetables" data="{{course:timeTables[index]}}"></template> 
-      </wxc-tab-panel> 
-     </wxc-tab> 
-  </view> 
+        <template is="timetables" data="{{course:timeTables[index]}}"></template>
+      </wxc-tab-panel>
+    </wxc-tab>
+  </view>
 </view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中
+</loading>
