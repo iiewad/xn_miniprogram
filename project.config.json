@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -96,12 +96,6 @@
 					"id": -1,
 					"name": "showBrows",
 					"pathName": "pages/index/jy/jy",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "测试",
-					"pathName": "pages/index/test/test",
 					"query": ""
 				}
 			]

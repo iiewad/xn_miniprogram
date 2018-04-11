@@ -4,22 +4,26 @@
 
 <view class="container">
   <view class="picker">
-    <picker class="picker-xq" bindchange="bindTermPickerChange" value="{{index}}" range="{{term}}" range-key="{{'class_term_name'}}">
-      <view>{{currentTerm.class_term_name}}</view>
+    <picker class="picker-xq" bindchange="bindTermPickerChange" value="{{index}}" range="{{terms}}" range-key="{{'class_term_name'}}">
+      <view>{{selectedTerm.class_term_name}}</view>
     </picker>
-    <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}" range-key="{{'week_name'}}">
-      <view>{{currentWeek.week_name}}</view>
+
+    <!-- <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}" range-key="{{'week_name'}}"> -->
+    <picker class="picker-week" bindchange="bindWeekPickerChange" value="{{index}}" range="{{allWeeks}}">
+      <view>{{selectedWeek}}</view>
     </picker>
   </view>
 
   <view class="week-tab">
-     <wxc-tab bind:tabchange="onClick" default-index="{{default_index}}" component-id="c2" animate="{{true}}" active-line-color="#11CD86" active-text-color="#11CD86"> 
-       <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" tab-index="{{index}}" wx:key="{{tab.courses}}" component-id="c2" label="{{tab.week_day}}">
-        
-         <template is="timetables" data="{{course:tab.course}}"></template> 
-        
-
-      </wxc-tab-panel> 
-     </wxc-tab> 
+    <wxc-tab default-index="{{currentDay}}" component-id="c2" animate="{{true}}" active-line-color="#11CD86" active-text-color="#11CD86">
+      <wxc-tab-panel wx:for="{{tabs}}" wx:key="" wx:for-item="tab" tab-index="{{index}}" component-id="c2" label="{{tab}}">
+        <!-- 一天课表  -->
+        <template is="timetables" data="{{course:timeTables[index]}}"></template>
+      </wxc-tab-panel>
+    </wxc-tab>
   </view>
 </view>
+
+<loading hidden="{{loadingHidden}}">
+  加载中
+</loading>
