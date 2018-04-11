@@ -97,12 +97,6 @@
 					"name": "showBrows",
 					"pathName": "pages/index/jy/jy",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "测试",
-					"pathName": "pages/index/test/test",
-					"query": ""
 				}
 			]
 		}

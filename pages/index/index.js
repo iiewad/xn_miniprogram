@@ -154,10 +154,6 @@ Page({
     util.requestQuery(url_str, params, 'GET', (res) => {
       var timeTable = res.data.data;
       this.getTodayTable(timeTable);
-    }, function (res) {
-      console.log('---------Failed--------');
-    }, function (res) {
-      console.log('--------Compliete------');
     });
   },
   /**
@@ -194,6 +190,7 @@ Page({
     util.requestQuery(url_str, '', 'GET', function (res) {
       var res = res.data.data;
       var currentTerm = res[res.length - 1];
+      // 这里要判断res吧，不存在抛异常
       that.setData({
         currentTerm: currentTerm
       });
@@ -201,10 +198,6 @@ Page({
       wx.setStorageSync('currentTerm', currentTerm);
       var currentWeek = that.getCurrentWeek();
       that.getTimeTable(currentWeek);
-    }, function (res) {
-      console.log('--------Failed--------');
-    }, function (res) {
-      console.log('--------Complete--------');
     });
   },
 

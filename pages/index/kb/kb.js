@@ -1,222 +1,174 @@
-// pages/index/kb/kb.js
 const app = getApp();
 const util = require('../../../utils/util.js');
 
+import { Kb } from 'kb-model.js';
+var kb = new Kb();
+
 export default Component({
   data: {
-    tabs: [
-      { week_id: 0, week_day: '日' },
-      { week_id: 1, week_day: '一' },
-      { week_id: 2, week_day: '二' },
-      { week_id: 3, week_day: '三' },
-      { week_id: 4, week_day: '四' },
-      { week_id: 5, week_day: '五' },
-      { week_id: 6, week_day: '六' }
-    ],
-    default_index: '',
-    term: {},
-    allWeeks: {},
-    currentTerm: {},
-    currentWeek: {},
-    timetable: {},
+    tabs: ['日', '一', '二', '三', '四', '五', '六',],
+    terms: {},          // [所有]所有学期
+    allWeeks: {},       // [所有]选中学期的所有周
+    selectedTerm: {},    // [选中]当前选中的学期
+    selectedWeek: '',    // [选中]当前选中的周
+    currentDay: 0,     // [本]今天是星期几
+    // 本学期，本周无必要绑定到data里，[本]初始化[选中],picker改变[选中]，然后一切都根据[选中]来变化 
+    timeTables: {},     // 一周课表
   },
   methods: {
-    renderTimetable: function (tableRes) {
-      var monTable = [];
-      var tueTable = [];
-      var wenTable = [];
-      var thrTable = [];
-      var friTable = [];
-      var satTable = [];
-      var sunTable = [];
-      for (var i = 0, len = tableRes.length; i < len; i++) {
-        if (tableRes[i].section == "星期一") {
-          monTable.push(tableRes[i]);
-        } else if (tableRes[i].section == "星期二") {
-          tueTable.push(tableRes[i]);
-        } else if (tableRes[i].section == "星期三") {
-          wenTable.push(tableRes[i])
-        } else if (tableRes[i].section == "星期四") {
-          thrTable.push(tableRes[i])
-        } else if (tableRes[i].section == "星期五") {
-          friTable.push(tableRes[i])
-        } else if (tableRes[i].section == "星期六") {
-          satTable.push(tableRes[i])
-        } else if (tableRes[i].section == "星期日") {
-          friTable.push(tableRes[i])
-        }
-      }
-      this.setData({
-        // timetable: [
-        tabs: [
-          { week_id: 0, week_day: '日', course: sunTable },
-          { week_id: 1, week_day: '一', course: monTable },
-          { week_id: 2, week_day: '二', course: tueTable },
-          { week_id: 3, week_day: '三', course: wenTable },
-          { week_id: 4, week_day: '四', course: thrTable },
-          { week_id: 5, week_day: '五', course: friTable },
-          { week_id: 6, week_day: '六', course: satTable }
-        ]
-      })
-    },
-
-    bindWeekPickerChange: function (e) {
-      console.log(e.detail.value);
-      this.setData({
-        currentWeek: {
-          id: parseInt(e.detail.value) + 1,
-          week_name: this.data.allWeeks[e.detail.value].week_name,
-          day_range: this.data.allWeeks[e.detail.value].day_range
-        }
-      });
-      this.getTimetable();
-    },
-
-    bindTermPickerChange: function (e) {
-      console.log(e.detail.value);
-      this.setData({
-        currentTerm: this.data.term[e.detail.value]
-      });
-      this.setWeeks();
-    },
-
-    setTimetable: function (tableRes) {
-      console.log('Start Set TimeTables')
-      this.renderTimetable(tableRes);
-    },
-
-    getTimetable: function () {
-      console.log('Start Get TimeTables')
-      var that = this;
-      var params = {};
-      params.Id = wx.getStorageSync('stuUserInfo').cardcode; //"20150902233720207";
-      params.Term = this.data.currentTerm.class_year + this.data.currentTerm.class_term;
-      params.weeks = this.data.currentWeek.id;
-      var url_str = app.globalData.url + '/api/get_timetable';
-
-      util.requestQuery(url_str, params, 'GET', function (res) {
-        console.log(res.data);
-        that.setTimetable(res.data.data);
-      }, function (res) {
-        console.log('---------Failed--------');
-      }, function (res) {
-        console.log('--------Compliete------');
-      });
-    },
-
-    setWeeks: function () {
-      console.log('Start Set Weeks')
-      var weeksData = this.buildWeeks()
-      if (this.data.currentWeek == '') {
-        this.setData({
-          currentWeek: {
-            id: 1,
-            week_name: this.data.allWeeks[0].week_name,
-            day_range: this.data.allWeeks[0].day_range
-          }
-        })
-      }
-      this.setData({
-        allWeeks: weeksData,
-      });
-      this.getTimetable(weeksData);
-    },
-
-    setTerm: function (termRes) {
-      console.log('Start Set TermData');
-      termRes.forEach(function (element) {
-        element.class_term_name = element.class_year + '年' + element.class_term + '学期';
-      });
-      this.setData({
-        term: termRes,
-        currentTerm: termRes[termRes.length - 1]
-      });
-      this.setWeeks();
-    },
-
-    getTerm: function () {
-      console.log('Start Get Term');
-      var that = this;
-      var url_str = app.globalData.url + '/api/get_term';
-      util.requestQuery(url_str, '', 'GET', function (res) {
-        that.setTerm(res.data.data);
-      }, function (res) {
-        console.log('--------Failed--------');
-      }, function (res) {
-        console.log('--------Complete--------');
-      });
-    },
-
-    onClick: function (e) {
-      console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);
-    },
-
     onLoad: function (options) {
+      this._loadData();
+    },
+    /**
+     * 自定义私有方法前加_，方便自己和他人识别，实际_是没作用的
+     */
+    _loadData() {
+      // 初始化 今天是星期几
       var today = new Date();
       this.setData({
-        default_index: today.getDay()
+        currentDay: today.getDay()
       })
-      this.getTerm();
+      kb.getTerms((terms) => {
+        var currentTerm = this.setTerms(terms);
+        var currentWeek = this.setWeeks(currentTerm, true);
+        // 初始化选中学期，周为本学期，本周
+        this.setData({
+          selectedTerm: currentTerm,
+          selectedWeek: currentWeek
+        });
+        // 获取本周课表
+        this.setTimeTable();
+      });
     },
-
-    onReady: function (options) {
-    },
-
-    onShow: function (options) {
-    },
-
-    buildWeeks: function () {
-      var currentWeeks = {};
-      currentWeeks.begindate = this.data.currentTerm.begindate.substring(0, 4) + '-' + this.data.currentTerm.begindate.substring(4, 6) + '-' + this.data.currentTerm.begindate.substring(6, 8);
-      currentWeeks.begindate = this.getDate(currentWeeks.begindate);
-      currentWeeks.enddate = this.data.currentTerm.enddate.substring(0, 4) + '-' + this.data.currentTerm.enddate.substring(4, 6) + '-' + this.data.currentTerm.enddate.substring(6, 8);
-      currentWeeks.enddate = this.getDate(currentWeeks.enddate);
-
-      var dateArray = new Array();
-      while ((currentWeeks.enddate.getTime() - currentWeeks.begindate.getTime()) >= 0) {
-        var year = currentWeeks.begindate.getFullYear();
-        var month = currentWeeks.begindate.getMonth().toString().length == 1 ? "0" + currentWeeks.begindate.getMonth().toString() : currentWeeks.begindate.getMonth();
-        var day = currentWeeks.begindate.getDate().toString().length == 1 ? "0" + currentWeeks.begindate.getDate() : currentWeeks.begindate.getDate();
-        dateArray.push(year + "-" + month + "-" + day);
-        currentWeeks.begindate.setDate(currentWeeks.begindate.getDate() + 1);
-      }
-
+    /**
+     * 绑定 所有学期 数据
+     * 返回 本学期
+     */
+    setTerms: function (termArr) {
+      termArr.forEach(function (element) {
+        element.class_term_name = element.class_year + '年' + element.class_term + '学期';
+      });
+      var currentTerm = termArr[termArr.length - 1];  // 根据经验，本学期通常为api数据的最后一个元素
+      // 完善点应该要判断currentTerm是否存在
       this.setData({
-        currentWeek: ''
-      })
-
+        terms: termArr,
+      });
+      return currentTerm;
+    },
+    /**
+     * 绑定 一个学期的所有周数据
+     * 返回默认周
+     */
+    setWeeks(term, current = false) {
       var weeks = [];
-      var weekCount = 0;
-      var day_range = '';
-      var today = util.formatDate(new Date(), '-');
-      for (var i = 0, len = dateArray.length; i < len; i += 7) {
-        day_range = dateArray.slice(i, i + 7);
-        if (day_range.includes(today)) {
-          weeks[weekCount++] = {
-            'week_name': '第' + weekCount + '周(当前)',
-            'day_range': day_range
-          }
-          this.setData({
-            currentWeek: {
-              'id': weekCount,
-              'week_name': '第' + weekCount + '周(当前)',
-              'day_range': day_range
-            }
-          })
-        } else {
-          weeks[weekCount++] = {
-            'week_name': '第' + weekCount + '周',
-            'day_range': day_range
+      var defaultWeek;
+      var beginTime = kb.getTime(term.begindate);
+      var endTime = kb.getTime(term.enddate);
+      var weekCount = kb.getDifWeekCount(beginTime, endTime);   // 指定学期总周数
+      if (current == true) {    // 本周 在 传入学期里
+        var currentWeek = kb.getCurrentWeek(beginTime, weekCount);
+        for (var i = 0; i < weekCount; i++) {
+          var weekValue = i + 1;
+          weeks[i] = '第' + weekValue + '周';
+          (weekValue == currentWeek) && (weeks[i] += '（当前）');
+        }
+        defaultWeek = weeks[currentWeek - 1]; // 本学期默认选择本周
+      } else {
+        for (var i = 0; i < weekCount; i++) {
+          weeks[i] = '第' + (i + 1) + '周';
+        }
+        defaultWeek = weeks[0];  // 非本学期的默认选择第一周
+      }
+      this.setData({
+        allWeeks: weeks,
+      });
+      return defaultWeek;
+    },
+    /**
+     * 处理 一周的课表数据 相关
+     */
+    setTimeTable() {
+      // 根据 第几周 获取 weekIndex
+      var selectedWeek = this.data.selectedWeek;
+      var allWeeks = this.data.allWeeks;
+      for (var i in allWeeks) {
+        if (allWeeks[i] == selectedWeek) {
+          break;
+        }
+      }
+      var weekIndex = parseInt(i) + 1;
+      kb.getTimeTable(this.data.selectedTerm, weekIndex, (data) => {
+        this.bindTimeTable(data);
+      });
+    },
+    /**
+     * 绑定 一周的课表数据
+     */
+    bindTimeTable(tables) {
+      // 数组处理！有更巧妙的方法吗？
+      var weeksName = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      var classifiedTables = [];
+      // 初始化数组
+      for (var i = 0; i <= 6; i++) {
+        classifiedTables[i] = [];
+      }
+      // 课程按星期一~日分类
+      for (var i in tables) {
+        for (var j in weeksName) {
+          if (weeksName[j] == tables[i].section) {
+            classifiedTables[j].push(tables[i]);
+            break;
           }
         }
       }
-      return weeks;
+      // 课程排序
+      var sortedTables = [];
+      for (var i in classifiedTables) {
+        sortedTables[i] = this.sortOneDayTable(classifiedTables[i]);
+      }
+      this.setData({
+        timeTables: sortedTables
+      });
     },
-
-    getDate: function (datestr) {
-      var temp = datestr.split("-");
-      var date = new Date(temp[0], temp[1], temp[2]);
-      return date;
-    }
+    /**
+     * 对一天课表排序
+     */
+    sortOneDayTable(tables) {
+      var sortedTable = [];
+      for (var i in tables) {
+        var order = tables[i]['JieC'].substring(0, 1);
+        sortedTable[order - 1] = tables[i];
+      }
+      // 去除数组中空元素
+      var length = sortedTable.length;
+      for (var i = 0; i < length; i++) {
+        (sortedTable[i] == undefined) && sortedTable.splice(i, 1);
+      }
+      return sortedTable;
+    },
+    /**
+     * 学期选择处理函数 : 重新绑定selectedTerm
+     */
+    bindTermPickerChange(event) {
+      var index = event.detail.value;
+      var selectedTerm = this.data.terms[index];
+      this.setData({
+        selectedTerm: selectedTerm
+      });
+      this.setWeeks(selectedTerm);
+      this.setTimeTable();
+    },
+    /**
+     * 周选择处理函数：重新绑定selectedWeek
+     */
+    bindWeekPickerChange(event) {
+      var index = parseInt(event.detail.value);
+      var weekIndex = index + 1;
+      // 更改选中周
+      this.setData({
+        selectedWeek: this.data.allWeeks[index]
+      });
+      this.setTimeTable();
+    },
   }
 });

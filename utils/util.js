@@ -34,14 +34,14 @@ const requestQuery = (url, data, method, success, fail, complete) => {
       "accept": "application/vnd.api+json;version=1",
       'content-type': 'application/json' // 默认值
     },
-    success: function(res) {
-      success(res);
+    success: function (res) {
+      success && success(res);
     },
-    fail: function(res) {
-      fail(res);
+    fail: function (res) {
+      fail && fail(res);
     },
-    complete: function(res) {
-      complete(res);
+    complete: function (res) {
+      complete && complete(res);
     }
   })
   console.log("-----------End ------ Request ---------")
