@@ -8,7 +8,7 @@
       </view>
     </view>
     <view class="section form-item">
-      <picker mode="date" value="{{beginDate}}" start="2014-09-01" end="{{beginDate}}" bindchange="bindBeginDateChange">
+      <picker mode="date" value="index" start="2014-09-01" end="{{today}}" bindchange="bindBeginDateChange">
         <view class="picker">
           🕛
           <text>{{ beginDate }}</text>
@@ -16,7 +16,7 @@
       </picker>
     </view>
     <view class="section form-item">
-      <picker mode="date" value="{{endDate}}" start="2014-09-01" end="{{endDate}}" bindchange="bindEndDateChange">
+      <picker mode="date" value="{{index}}" start="2014-09-01" end="{{today}}" bindchange="bindEndDateChange">
         <view class="picker">
           🕐
           <text>{{ endDate }}</text>

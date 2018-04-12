@@ -4,6 +4,7 @@ const util = require('../../../utils/util.js')
 
 Page({
   data: {
+    today: '',
     beginDate: '',
     endDate: '',
     tranItems: '',
@@ -152,14 +153,15 @@ Page({
   },
 
   onLoad: function (options) {
-    var date = new Date();
-    var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    //var date = new Date();
+    //var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     var userinfo = wx.getStorageSync('stuUserInfo');
-    today = util.formatDate(new Date(today), '-');
+    var today = util.formatDate(new Date(), '-');
     this.setData({
       endDate: today,
       beginDate: today,
-      userinfo: userinfo
+      userinfo: userinfo,
+      today: today
     });
     this.getTranItems();
   },
