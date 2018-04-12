@@ -102,7 +102,7 @@ Page({
           loginFlag: true,
           funcEnabled: true
         });
-        // 今天课表
+        // 获取今天课表
         that.getTerm();
       },
       fail: function () {
@@ -127,14 +127,13 @@ Page({
           week: currentWeek,
           callback: function (data) {
             var timeTable = kb.getCurrentDayTable(data);
-            console.log(timeTable);
             that.setData({
               todayTable: timeTable,
               loadingHidden: 1
             });
           }
         };
-        kb.getTimeTable(params);
+        kb.getCurrentWeekTable(params);
       } else {
         this.setData({
           todayTable: [],

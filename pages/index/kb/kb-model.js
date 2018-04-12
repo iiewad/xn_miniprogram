@@ -8,26 +8,54 @@ const app = getApp();
 
 const util = require('../../../utils/util.js');
 
-
 class Kb {
+  /**
+   * 对20160229 变成 20160329
+   * 低概率事件如12月份结束等暂时不处理
+   */
+  getTimeAddMonth(date) {
+    var nDate;
+    var arr = date.split('');
+    arr[5] = parseInt(date.substring(5, 6)) + 1;
+    var nDate = arr.join('');
+    return this.getTime(nDate);
+  }
   /**
    * 获取能获取的学期
    */
   getTerms(callback) {
-    var url_str = app.globalData.url + '/api/get_term';
-    util.requestQuery(url_str, '', 'GET', (res) => {
-      var term = res.data.data;
-      callback && callback(term);
-    });
+    var obj = wx.getStorageSync('terms');
+    var terms = obj.terms;
+    var currentTerm = this.getCurrentTerm(terms);
+    var d = new Date();
+    var currentTime = d.getTime();
+    // 缓存不存在或过期
+    if (currentTerm == -1 || currentTime >= obj.expire_time) {
+      var url_str = app.globalData.url + '/api/get_term';
+      util.requestQuery(url_str, '', 'GET', (res) => {
+        var terms = res.data.data;
+        // 暂定到期时间为本学期结束后一个月
+        var currentTerm = this.getCurrentTerm(terms);
+        wx.setStorageSync('terms', {
+          terms: terms,
+          expire_time: this.getTimeAddMonth(currentTerm.enddate)
+        });
+        callback && callback(terms);
+      });
+    } else {
+      callback && callback(terms);
+    }
   }
   /**
    * 获取本学期
    */
   getCurrentTerm(terms) {
+    if (!(terms instanceof Array)) {
+      return -1;
+    }
     // 这里要判断res吧，不存在抛异常
     var currentTerm = terms[terms.length - 1];    // 根据经验，本学期通常为api数据的最后一个元素
     // TODO:考虑如何清学期缓存
-    // wx.setStorageSync('currentTerm', currentTerm);
     return currentTerm;
   }
   /**
@@ -39,6 +67,7 @@ class Kb {
     var arrDate = nDate.split(',');
     var d = new Date();
     d.setFullYear(arrDate[0], arrDate[1] - 1, arrDate[2]);
+    d.setHours(0, 0, 0, 0);
     var time = d.getTime();
     return time;
   }
@@ -95,6 +124,44 @@ class Kb {
       var timeTable = res.data.data;
       params.callback && params.callback(timeTable);
     });
+  }
+  /**
+   * 根据 今天 获取下周一00:00:00时间戳
+   */
+  getNextMondayTime() {
+    var oneDayTime = 24 * 60 * 60 * 1000;
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    var currentTime = d.getTime();
+    var day = d.getDay() || 7;    // 解决星期天返回0带来的问题
+    var nextMondayTime = currentTime + (7 - day + 1) * oneDayTime;    // 当前走过的时间 + 今天到星期天相差天数 * 一天时长
+    return nextMondayTime;
+  }
+  /**
+   * 获取当前周课表
+   */
+  getCurrentWeekTable(params) {
+    var obj = wx.getStorageSync('currentWeekTable');
+    var currentWeekTable = obj.timeTable;
+    var d = new Date();
+    // 缓存不存在或过期，才重新获取数据
+    if (!currentWeekTable || d.getTime() >= obj.expire_time) {
+      var that = this;
+      var oParams = {
+        term: params.term,
+        week: params.week,
+        callback: function (timeTable) {
+          wx.setStorageSync('currentWeekTable', {
+            timeTable: timeTable,
+            expire_time: that.getNextMondayTime()   // 到期时间为下周一0:0:0
+          });
+          params.callback && params.callback(timeTable);
+        }
+      };
+      this.getTimeTable(oParams);
+    } else {
+      params.callback && params.callback(currentWeekTable);
+    }
   }
   /**
    * 获取今天课表

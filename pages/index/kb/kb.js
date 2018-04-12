@@ -13,6 +13,7 @@ export default Component({
     selectedTerm: {},    // [选中]选中的学期
     selectedWeek: '',    // [选中]选中的周
     currentTerm: {},     // [本]本学期 
+    currentWeek: '',     // [本]本周
     currentDay: 0,     // [本]今天是星期几
     loadingHidden: 0
     // [本]初始化[选中],picker改变[选中]，然后一切都根据[选中]来变化 
@@ -81,7 +82,7 @@ export default Component({
       });
     },
     /**
-     * 加“当前”
+     * 加“当前”处理
      */
     _setCurrentWeek(weekCount, currentWeek) {
       var weeks = [];
@@ -92,13 +93,16 @@ export default Component({
         (weekValue == currentWeek) && (weeks[i] += '（当前）');
       }
       defaultWeek = weeks[currentWeek - 1]; // 本学期默认选择本周
+      this.setData({
+        currentWeek: defaultWeek
+      });
       return {
         weeks: weeks,
         defaultWeek: defaultWeek
       };
     },
     /**
-     * 不加“当前”
+     * 不加“当前”处理
      */
     _noSetCurrentWeek(weekCount) {
       var weeks = [];
@@ -116,29 +120,35 @@ export default Component({
      *  绑定：选中周的课表数据
      */
     setTimeTable() {
-      var weekIndex = this.getWeekIndex();
+      var term = this.data.selectedTerm;
+      var weekIndex = this.getWeekIndex(this.data.selectedWeek);
       var that = this;
       var params = {
-        term: this.data.selectedTerm,
+        term: term,
         week: parseInt(weekIndex) + 1,
         callback: function (data) {
           var tables = kb.classfyTables(data);
           that.setData({
             timeTables: tables,
-            loadingHidden:1
+            loadingHidden: 1
           });
         }
       };
-      kb.getTimeTable(params);
+      // 判断是否 本学期，本周
+      if (term.id == this.data.currentTerm.id &&
+        weekIndex == this.getWeekIndex(this.data.currentWeek)) {
+        kb.getCurrentWeekTable(params);
+      } else {
+        kb.getTimeTable(params);
+      }
     },
     /**
-     * 根据 选中周 value 获取其在allWeeks的index
+     * 根据 value 获取其在allWeeks的index
      */
-    getWeekIndex() {
-      var selectedWeek = this.data.selectedWeek;
+    getWeekIndex(weekValue) {
       var allWeeks = this.data.allWeeks;
       for (var i in allWeeks) {
-        if (allWeeks[i] == selectedWeek) {
+        if (allWeeks[i] == weekValue) {
           break;
         }
       }
@@ -152,7 +162,7 @@ export default Component({
       var selectedTerm = this.data.terms[index];
       this.setData({
         selectedTerm: selectedTerm,
-        loadingHidden:0,
+        loadingHidden: 0,
       });
       this.setWeeks();
       this.setTimeTable();
