@@ -1,4 +1,10 @@
 <view class="container">
+
+  <view class="warning" hidden="{{warningHidden}}">
+    剩余电费不足10元！
+  </view>
+
+
   <view class="top-layout">
     <view class="energy-balance-layout">
       <view class="energy-balance">当前剩余：{{surplusQuery.current_balance}}</view>
