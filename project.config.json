@@ -81,26 +81,8 @@
 					"query": ""
 				},
 				{
-					"id": 8,
-					"name": "showBrows",
-					"pathName": "pages/index/ykt/showBrows",
-					"query": ""
-				},
-				{
 					"id": -1,
 					"name": "Brrows",
-					"pathName": "pages/index/jy/jy",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "showBrows",
-					"pathName": "pages/index/jy/jy",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "借阅",
 					"pathName": "pages/index/jy/jy",
 					"query": ""
 				}

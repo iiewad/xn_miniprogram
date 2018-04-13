@@ -31,6 +31,6 @@
   float: left;
 }
 
-.coming {
+.warning {
   background-color: red;
 }

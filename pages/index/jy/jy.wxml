@@ -1,9 +1,8 @@
-<!--pages/index/jy/jy.wxml-->
 <view class="container">
   <view class="borrow-list">
-    <view class="borrow-item" wx:for="{{borrowInfo}}" wx:key="brows">
+    <view class="borrow-item" wx:for="{{books}}" wx:key="brows">
       <view class="borrow-book-name">
-        <label>书名</label>
+        <label>书名：</label>
         {{item.ShuName}}
       </view>
       <view class="borrow-date">
@@ -14,9 +13,9 @@
         <label>归还日期：</label>
         {{item.yhrq}}
       </view>
-      <view class="{{item.distanceDay>5?'':'coming'}}">
-        <label>距归还还剩：</label>
-        {{item.distanceDay}}天
+      <view class="{{item.disDay.isWarning<2?'warning':''}}">
+        <label>距归还：</label>
+        {{item.disDay.value}}
       </view>
       <view class="borrow-state">
         <label>状态：</label>
