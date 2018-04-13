@@ -97,6 +97,12 @@
 					"name": "showBrows",
 					"pathName": "pages/index/jy/jy",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "借阅",
+					"pathName": "pages/index/jy/jy",
+					"query": ""
 				}
 			]
 		}

@@ -1,4 +1,3 @@
-// pages/index/jy/jy.js
 const app = getApp();
 const util = require('../../../utils/util.js');
 
@@ -9,11 +8,35 @@ Page({
   },
 
   setBorrowInfo: function (borrowRes) {
+    for (var i in borrowRes) {
+      // 添加 距 到期天数
+      var distanceDay = this.countDistanceDay(borrowRes[i].yhrq);
+      if (distanceDay > 0) {
+        borrowRes[i].distanceDay = distanceDay;
+      } else {
+        borrowRes[i].distanceDay = '逾期';
+        borrowRes[i].distanceDay += -1 * distanceDay + 1;
+      }
+    }
     this.setData({
-      borrowInfo: borrowRes.TList
+      borrowInfo: borrowRes
     })
   },
-
+  /**
+   * 计算 距 归还日期 天数
+   */
+  countDistanceDay(date) {
+    var cD = new Date();
+    var tD = new Date();
+    var nDate, nDateArr, distanceDay;
+    cD.setHours(0, 0, 0, 0);
+    tD.setHours(0, 0, 0, 0);
+    nDate = date.substring(0, 9);
+    nDateArr = nDate.split('/');
+    tD.setFullYear(nDateArr[0], parseInt(nDateArr[1]) - 1, nDateArr[2]);
+    distanceDay = (tD.getTime() - cD.getTime()) / 86400000;
+    return distanceDay;
+  },
   requestBorrow: function (cardcode) {
     var that = this;
     var url_str = app.globalData.url + '/api/get_borrow';
@@ -23,12 +46,12 @@ Page({
       pagesize: 20
     };
 
-    util.requestQuery(url_str, params, 'GET', function(res) {
-      console.log(res.data.data);
-      that.setBorrowInfo(res.data.data);
-    }, function(res) {
+    util.requestQuery(url_str, params, 'GET', function (res) {
+      // console.log(res.data.data);
+      that.setBorrowInfo(res.data.data.TList);
+    }, function (res) {
       console.log('Request Failed');
-    }, function(res) {
+    }, function (res) {
       console.log('Request Complete');
     })
   },
@@ -41,55 +64,5 @@ Page({
         return true;
       }
     });
-    
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
