@@ -20,7 +20,7 @@
 
   <view class="page__bd user-feed-back">
     <view class="weui-cells">
-      <navigator>
+      <navigator url="feedback/feedback">
         <view class="weui-cell">
           <view class="weui-cell__hd">
             <image src="../../images/feed-back.png"></image>

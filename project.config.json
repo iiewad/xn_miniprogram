@@ -91,6 +91,18 @@
 					"name": "showDF",
 					"pathName": "pages/index/df/msg_success",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "feedback",
+					"pathName": "pages/me/feedback/feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "me",
+					"pathName": "pages/me/me",
+					"query": ""
 				}
 			]
 		}

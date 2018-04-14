@@ -1,0 +1,17 @@
+<!--pages/me/feedback/feedback.wxml-->
+<view class="container">
+  <view class="feedback-content">
+    <view class="feedback__title">
+      <input type="text" placeholder-class="feedback__title__placeholder" placeholder="反馈标题" bindblur="feedBackTitleBind"></input>
+    </view>
+    <view class="feedback__des">
+      <textarea placeholder-class="feedback__des__placeholder" placeholder="问题描述：最多140字" bindblur="feedBackDesBind"></textarea>
+    </view>
+    <view class="feedback-button">
+      <button bindtap="submitFeedBack">提交</button>
+    </view>
+
+    <wxc-dialog class="wxc-dialog" title="反馈结果" content="{{feedbackRes}}" confirm-text="知道了" bindconfirm="onConfirm" bindcancel="onCancel"></wxc-dialog>
+
+  </view>
+</view>
