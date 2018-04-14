@@ -130,6 +130,7 @@ Page({
     util.requestQuery(url_str, params, 'GET', function(res) {
       console.log(res.data);
       that.setRoomList(res.data.roomList, addressType);
+      wx.hideLoading();
       return true;
     }, function(res) {
       console.log('---------Failed--------');
@@ -139,6 +140,9 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.showLoading({
+      title: '正在加载'
+    });
     var priDormId = '';
     this.getRoomList(priDormId, 'apartment');
     var currentDate = new Date;
@@ -151,11 +155,6 @@ Page({
     })
   },
   onReady: function () {
-    wx.showToast({
-      title: '正在拼命加载',
-      icon: 'loading',
-      duration: 3000
-    });
   },
 
  

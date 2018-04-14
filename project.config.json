@@ -85,6 +85,12 @@
 					"name": "Brrows",
 					"pathName": "pages/index/jy/jy",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "showDF",
+					"pathName": "pages/index/df/msg_success",
+					"query": ""
 				}
 			]
 		}

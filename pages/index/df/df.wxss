@@ -1,52 +1,59 @@
 /* pages/index/df/df.wxss */
 .container {
-  background-color: #ffffff;
-  padding-top: 50rpx;
-  width: 100%;  
-}
-page {
+  background-color: #fefefe;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  padding-top: 15vh; 
 }
-.page__hd{
-    padding: 50rpx 50rpx 100rpx 50rpx;
-    text-align: center;
+
+.df-form {
+  width: 90%;
+  min-height: 40vh;
+  margin: 0 auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
-.page__title{
-    display: inline-block;
-    padding: 20rpx 40rpx;
-    font-size: 32rpx;
-    color: #AAAAAA;
-    border-bottom: 1px solid #CCCCCC;
+
+.form-item {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  line-height: 100rpx;
+  border-top: 1px solid #fafafa;
+  border-bottom: 1px solid #fafafa;
+  text-align: center;
 }
-.page__desc{
-    display: none;
-    margin-top: 20rpx;
-    font-size: 26rpx;
-    color: #BBBBBB;
+
+.form-item label {
+  width: 30%;
+  border-right: 1px solid #fafafa;
+  line-height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.section{
+
+.form-item label image {
+  width: 48rpx;
+  height: 48rpx;
 }
-.section__title{
-    margin-bottom: 16rpx;
-    padding-left: 30rpx;
-    padding-right: 30rpx;
+
+.form-item picker {
+  width: 70%;
 }
-picker {
-  padding: 26rpx; 
-}
-.label {
-  width: 20%;
-  float: left;
-}
-.picker{
-  width: 80%;
-  color: #04384A;
-}
-button {
+
+.query-button {
   background-color: #1F6ED4;
-  border: 0;
-  width: 80%;
+  border: 1px solid #ffffff;
+  width: 90%;
   margin: 30rpx auto;
-  color: #f0f0f0;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);  
+}
+
+.query-button button {
+  border: none;
+  width: 100%;
+  background-color: #1F6ED4;
+  color: #f0f0f0;  
 }
