@@ -130,6 +130,7 @@ Page({
     util.requestQuery(url_str, params, 'GET', function(res) {
       console.log(res.data);
       that.setRoomList(res.data.roomList, addressType);
+      wx.hideLoading();
       return true;
     }, function(res) {
       console.log('---------Failed--------');
@@ -139,6 +140,9 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.showLoading({
+      title: '正在加载'
+    });
     var priDormId = '';
     this.getRoomList(priDormId, 'apartment');
     var currentDate = new Date;
@@ -150,57 +154,8 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-    wx.showToast({
-      title: '正在拼命加载',
-      icon: 'loading',
-      duration: 3000
-    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })

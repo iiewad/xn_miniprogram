@@ -81,12 +81,6 @@
 					"query": ""
 				},
 				{
-					"id": 8,
-					"name": "showBrows",
-					"pathName": "pages/index/ykt/showBrows",
-					"query": ""
-				},
-				{
 					"id": -1,
 					"name": "Brrows",
 					"pathName": "pages/index/jy/jy",
@@ -94,8 +88,20 @@
 				},
 				{
 					"id": -1,
-					"name": "showBrows",
-					"pathName": "pages/index/jy/jy",
+					"name": "showDF",
+					"pathName": "pages/index/df/msg_success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "feedback",
+					"pathName": "pages/me/feedback/feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "me",
+					"pathName": "pages/me/me",
 					"query": ""
 				}
 			]

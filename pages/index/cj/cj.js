@@ -6,17 +6,46 @@ Page({
   data: {
     xn: {},
     grades: {},
-    grade: {}
+    grade: {},
+    currentXN: '',
+    stuName: '',
+    popupgrade: ''
   },
 
-  bindPickerChange: function (e) {
-    var pickerValue = e.detail.value;
-    var currentXN = this.data.xn[pickerValue];
-    var grade = this.data.grades[currentXN];
+  showPopup(e) {
+    let popupComponent = this.selectComponent('.J_Popup');
+    popupComponent && popupComponent.show();
+    var browIndex = e.currentTarget.dataset.index;
+    console.log(browIndex);
     this.setData({
-      grade: grade
+      popupgrade: this.data.grade[browIndex]
     });
   },
+
+  hidePopup() {
+    let popupComponent = this.selectComponent('.J_Popup');
+    popupComponent && popupComponent.hide();
+  },
+
+  open: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: this.data.xn,
+      success: function (res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+          var pickerValue = res.tapIndex;
+          var currentXN = that.data.xn[pickerValue];
+          var grade = that.data.grades[currentXN];
+          that.setData({
+            currentXN: currentXN,
+            grade: grade
+          })
+        }
+      }
+    });
+  },
+
   setStuGrades: function (stuNumber, stuCardCode) {
     var that = this;
     var url = app.globalData.url + '/api/grade';
@@ -24,10 +53,17 @@ Page({
     params.stuNumber = stuNumber;
     params.stuCardCode = stuCardCode;
     util.requestQuery(url, params, 'GET', function(res) {
+      wx.hideLoading();
       console.log(res.data);
+      var xn = Object.keys(res.data.grades);
+      var grades = res.data.grades;
+      var currentXN = xn[0];
+      var grade = grades[currentXN];
       that.setData({
-        xn: Object.keys(res.data.grades),
-        grades: res.data.grades
+        xn: xn,
+        grades: grades,
+        currentXN: currentXN,
+        grade: grade
       })
     }, function(res) {
       console.log('Failed');
@@ -40,10 +76,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var stuInfo = wx.getStorageSync('stuUserInfo');
-    var stuNumber = stuInfo.schno;
-    var stuCardCode = stuInfo.cardcode;
-    this.setStuGrades(stuNumber, stuCardCode);
+    var that = this;
+    wx.showLoading({
+      title: '正在加载...'
+    });
+    wx.getStorage({
+      key: 'stuUserInfo',
+      success: function(res) {
+        var stuInfo = res.data;
+        var stuNumber = stuInfo.schno;
+        var stuCardCode = stuInfo.cardcode;
+        console.log(stuInfo.name)
+        that.setData({
+          stuName: stuInfo.name
+        });
+        that.setStuGrades(stuNumber, stuCardCode);
+      },
+    })
   },
 
   /**

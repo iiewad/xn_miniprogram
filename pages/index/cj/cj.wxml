@@ -1,43 +1,46 @@
 <!--pages/index/cj/cj.wxml-->
 <view class="container">
+  <view class="grades-title">
+    {{stuName + currentXN + grade[0].xq + '成绩'}}
+  </view>
   <view class="grades-content">
-    <view class="page__bd">
-      <view class="weui-btn-area">
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{xn}}">
-          <button type="default">选择学年</button>
-        </picker>
-      </view>
-      <view class="grades-list" wx:for="{{grade}}" wx:key="{{grade-item}}">
-        <view class="weui-form-preview grade-item">
-          <view class="weui-form-preview__hd grade-item-header">
-            <view class="weui-form-preview__item grade-kcm">
-              <view class="weui-form-preview__label kcm-title">课程名称</view>
-              <view class="weui-form-preview__value_in-hd kcm-content">{{item.kcmc}}</view>
-            </view>
-          </view>
-          <view class="weui-form-preview__bd">
-            <view class="weui-form-preview__item grade-xq">
-              <view class="weui-form-preview__label">学期</view>
-              <view class="weui-form-preview__value">{{item.xq}}</view>
-            </view>
-            <view class="weui-form-preview__item grade-cj">
-              <view class="weui-form-preview__label">成绩</view>
-              <view class="weui-form-preview__value">{{item.cj}}</view>
-            </view>
-            <view class="weui-form-preview__item grade-xf">
-              <view class="weui-form-preview__label">学分</view>
-              <view class="weui-form-preview__value">{{item.xf}}</view>
-            </view>
-            <view class="weui-form-preview__item grade-kcxz">
-              <view class="weui-form-preview__label">课程性质</view>
-              <view class="weui-form-preview__value">{{item.kcxz}}</view>
-            </view>
-          </view>
-          <!-- <view class="weui-form-preview__ft">
-          <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">操作</navigator>
-        </view>-->
-        </view>
+    <view class="grade-items">
+      <view class="grade-item" bindtap="showPopup" data-index="{{index}}" wx:for="{{grade}}" wx:key="grade">
+        <view class="subject">{{item.kcmc}}</view>
+        <view class="score" style="background: #29A2C6">{{item.cj}}</view>
       </view>
     </view>
+  </view>
+
+  <wxc-popup class="J_Popup" animation-mode="right" align="center">
+    <view class="popup__content">
+      <view class="popup-title">
+        {{popupgrade.kcmc}}
+      </view>
+      <view class="popup-item">
+        <view class="item-label">学年：</view>
+        <view class="item-data"> {{popupgrade.xn}}</view>
+      </view>
+      <view class="popup-item">
+        <view class="item-label">学期：</view>
+        <view class="item-data"> {{popupgrade.xq}}</view>
+      </view>
+      <view class="popup-item">
+        <view class="item-label">学分：</view>
+        <view class="item-data"> {{popupgrade.xf}}</view>
+      </view>
+      <view class="popup-item">
+        <view class="item-label">成绩：</view>
+        <view class="item-data"> {{popupgrade.cj}}</view>
+      </view>
+      <view class="popup-item">
+        <view class="item-label">课程性质：</view>
+        <view class="item-data"> {{popupgrade.kcxz}}</view>
+      </view>
+    </view>
+  </wxc-popup>
+
+  <view class="grades-footer">
+    <button type="default" bindtap="open">{{currentXN}}</button>
   </view>
 </view>

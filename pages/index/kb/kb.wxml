@@ -1,6 +1,6 @@
 <!--pages/index/kb/kb.wxml-->
 
-<import src="../../tpls/timetables/timetables.wxml" />;
+<import src="../../tpls/timetables/timetables.wxml" />
 
 <view class="container">
   <view class="picker">

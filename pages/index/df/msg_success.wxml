@@ -1,27 +1,38 @@
 <view class="container">
+
+  <view class="warning" hidden="{{warningHidden}}">
+    剩余电费不足10元！
+  </view>
+
+
   <view class="top-layout">
     <view class="energy-balance-layout">
-      <view class="energy-balance">当前剩余：{{surplusQuery.current_balance}}</view>
-      <view class="sun">☀️</view>
-      <view class="energy-price">当前电价：{{surplusQuery.energy_price}}</view>
+      <view class="energy-icon">
+        <image src="../../../images/df.png"></image>
+      </view>
+      <view class="energy-data">
+        <view class="energy-balance">当前剩余：{{surplusQuery.current_balance}}</view>
+        <view class="energy-price">当前电价：{{surplusQuery.energy_price}}</view>
+      </view>
     </view>
   </view>
 
   <view class="energy-layout">
+    <view class="energy-table-header">
+      <view class="energy-t-h-date">日期</view>
+      <view class="energy-t-h-energy">当日电费</view>
+      <view class="energy-t-h-balance">余额</view>
+    </view>
     <view class="energy-card" wx:for="{{energyQuery.consumer_records}}" wx:key="energyQuery">
       <view class="card-date">
-        <label class="card-label">日 期：</label>
-        <view class="card-data">{{item.consumer_date}}</view>
+        {{item.consumer_date}}
       </view>
       <view class="card-used-energy">
-        <label class="card-label">当日电费:</label>
-        <view class="card-data">{{item.used_energy}}</view>
+        {{item.used_energy}}
       </view>
       <view class="card-balance">
-        <label class="card-label">当日余额:</label>
-        <view class="card-data">{{item.balance}}</view>
+        {{item.balance}}
       </view>
-      <view class="image">🌳</view>
     </view>
   </view>
 </view>

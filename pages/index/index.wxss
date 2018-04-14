@@ -1,5 +1,4 @@
 /* pages/index/index.wxss */
-
 @import '../tpls/timetables/timetables.wxss';
 
 .container {
@@ -7,6 +6,7 @@
   height: 100vh;
   /* position: fixed;  */
 }
+
 .swiper-menu {
   height: 30%;
   padding: 15rpx 10rpx 10rpx;
@@ -14,11 +14,15 @@
 
 .swiper-menu .menu-content {
   width: 100%;
-  background: #B9EDF8;
-  min-height: 30%;
-  border-bottom: 1rpx solid #e5e5e5;
-  border-radius: 10rpx;
+  background: #fff;
+  min-height: 20vh;
   overflow: hidden;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+}
+
+.weui-grid__label {
+  color: #3d3d3b;
+  font-weight: 200;
 }
 
 .swiper-menu .menu-content .menu-item, .menu-item-disable {
@@ -35,6 +39,7 @@
 
 .menu-item-disable view.weui-grid__label {
   color: #9c9c9c;
+  font-weight: 200;
 }
 
 .swiper-menu .menu-content .menu-item .menu-item-img {
@@ -42,7 +47,7 @@
   height: 75rpx;
   margin: 15rpx auto;
   border-radius: 50%;
-  background: #D0DFE6;
+  background: #d0dfe6;
   padding: 10rpx;
 }
 
@@ -60,22 +65,40 @@
 .feature-content {
   width: 100%;
 }
+
 .feature-content .today-kb, .today-news, .today-borw {
   width: 95%;
   height: 150rpx;
   margin: 20rpx auto;
-  background: #BEF7E4;
+  background: #bef7e4;
   border-radius: 10rpx;
-  box-shadow: 1px 0px 2px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-sizing: border-box;
 }
 
 .timetable {
-  /* min-height: 300px; */
-  /* position:  */
+  /* min-height: 300px; *//* position:  */
 }
 
 .title {
   text-align: center;
   font-size: 40rpx;
+}
+
+/* 图书借阅  */
+
+.borrow-container {
+  padding: 40rpx;
+  margin: 0 auto;
+  border: 10rpx solid red;
+  /* width: 90%; */
+}
+
+.borrow-header {
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.borrow-main {
+  font-size: 28rpx;
 }

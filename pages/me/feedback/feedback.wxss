@@ -1,0 +1,72 @@
+/* pages/me/feedback/feedback.wxss */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: #f1f1f1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 30rpx;
+}
+
+.feedback-content {
+  width: 95%;
+  height: 500rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feedback__title, .feedback__des {
+  width: 95%;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.feedback__title {
+  height: 100rpx;
+}
+
+.feedback__des {
+  height: 300rpx;
+  padding-top: 20rpx;
+}
+
+.feedback__title input {
+  height: 100rpx;
+}
+
+.feedback__des textarea {
+  height: 300rpx;
+  padding-top: 10rpx;
+}
+
+.feedback__title__placeholder {
+  font-size: 36rpx;
+  font-weight: 300;
+}
+
+.feedback__des__placeholder {
+  font-size: 36rpx;
+  font-weight: 300;
+}
+
+.feedback-button {
+  width: 100%;
+  margin-top: 30rpx;
+  background-color: #1f6ed4;
+  border: 1px solid #fff;
+  margin: 30rpx auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+}
+
+.feedback-button button {
+  border: none;
+  width: 100%;
+  background-color: #1f6ed4;
+  color: #f0f0f0;
+}
