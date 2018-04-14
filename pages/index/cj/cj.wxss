@@ -1,19 +1,111 @@
 .container {
-  background-color: #BCD8C1;
+  background-color: #f1f1f1;
+  min-height: 100vh;
+  padding-top: 20rpx;
 }
-.weui-btn-area {
-  margin: 0;
+
+.grades-title {
+  width: 95%;
+  height: 150rpx;
+  background: #fff;
+  text-align: center;
+  line-height: 150rpx;
+  font-weight: 1000;
+  font-size: 48rpx;
+  margin: 0 auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
+
+.grades-content {
+  width: 95%;
+  min-height: 600rpx;
+  margin: 0 auto;
+  padding-bottom: 130rpx;
+}
+
+.grade-items {
+  width: 100%;
+  margin: 0 auto;
+}
+
 .grade-item {
-  margin: 30rpx auto;
+  width: 100%;
+  margin: 20rpx 0;
+  min-height: 100rpx;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-wrap: nowrap;
 }
-.grade-item-header {
-  height: 50rpx;
-  line-height: normal;
+
+.subject {
+  width: 70%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 38rpx;
+  font-weight: 300;
+  color: #364857;
 }
-.grade-kcm {
-  font-size: 36rpx;
+
+.score {
+  width: 30%;
+  height: 100rpx;
+  font-size: 42rpx;
+  font-weight: 1000;
+  color: #4a4a4a;
+  line-height: 100rpx;
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
 }
-.weui-form-preview__value_in-hd {
-  font-size: 36rpx;
+
+.grades-footer {
+  width: 100%;
+  height: 120rpx;
+  background: #f4f4f4;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #c4c4c4;
+}
+
+.J_Popup .popup__content {
+  width: 80%;
+  min-height: 500rpx;
+  background: #FDFFFC;
+  border-radius: 10rpx;
+  color: #606c70;  
+}
+
+.popup__content .popup-title {
+  text-align: center;
+  font-size: 42rpx;
+  font-weight: 500;
+  margin-top: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.popup__content .popup-item {
+  display: flex;
+  flex-flow: nowrap;
+  font-size: 38rpx;
+  font-weight: 200;
+  margin: 10rpx 0;
+  height: 60rpx;
+}
+
+.popup__content .popup-item .item-label, .item-data {
+  width: 50%;
+  height: 100rpx;
+}
+
+.item-label {
+  text-align: right;
+}
+
+.item-data {
+  text-align: left;
+}
+
+.grades-footer button {
+  height: 120rpx;
+  line-height: 120rpx;
 }
