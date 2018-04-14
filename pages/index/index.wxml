@@ -20,7 +20,19 @@
     </block>
   </swiper>
 
+  <!-- 图书借阅情况  -->
+  <block wx:if="{{borrowBooksInfo.state}}">
+    <view class="borrow-container">
+      <view class="borrow-header">
+        即将到期或逾期未还图书
+      </view>
+      <view class="borrow-main" wx:for="{{borrowBooksInfo.infos}}">
+        <text>{{index+1}}、{{item}}</text>
+      </view>
+    </view>
+  </block>
 
+  <!-- 今天课表  -->
   <view class="timetable">
     <view class="title">今天课表</view>
     <template is="timetables" data="{{course:todayTable}}"></template>

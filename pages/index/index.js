@@ -2,7 +2,10 @@ const app = getApp();
 const util = require('../../utils/util.js');
 
 import { Kb } from 'kb/kb-model.js';
+import { Book } from '../../utils/book.js';
 var kb = new Kb();
+var book = new Book();
+
 
 Page({
   data: {
@@ -67,7 +70,12 @@ Page({
     funcEnabled: false,
     // 今天课表
     todayTable: [],
-    loadingHidden: 0
+    loadingHidden: 0,
+    // 借阅情况
+    borrowBooksInfo: {
+      state: 0,
+      infos: []
+    }
   },
   tapFuncDisable: function () {
     console.log('未绑定用户信息')
@@ -103,11 +111,37 @@ Page({
           funcEnabled: true
         });
         // 获取今天课表
-        that.getTerm();
+        that._loadData();
       },
       fail: function () {
         that.setData({
           funcEnabled: false
+        });
+      }
+    });
+  },
+  _loadData() {
+    this.getTerm();
+    this.getBorrowsBooks();
+  },
+  /**
+   * 获取 借阅图书信息
+   */
+  getBorrowsBooks() {
+    book.getBorrowData((books) => {
+      var str, state, infos = [], borrowBooksInfo = {};
+      for (var i in books) {
+        state = books[i].disDay.isWarning;
+        if (state == 0 || state == 1) {
+          str = '《' + books[i].ShuName + '》 ' + books[i].disDay.value;
+          infos.push(str);
+        }
+      }
+      if (infos.length > 0) {
+        borrowBooksInfo.state = 1;
+        borrowBooksInfo.infos = infos;
+        this.setData({
+          borrowBooksInfo: borrowBooksInfo
         });
       }
     });

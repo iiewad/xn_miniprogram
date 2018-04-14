@@ -27,6 +27,12 @@
   margin-top: 10rpx;
 }
 
+.warning{
+  text-align: center;
+  font-size: 60rpx;
+  background-color: red;
+}
+
 .sun {
   position: absolute;
   top: 2%;
