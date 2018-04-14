@@ -14,11 +14,15 @@
 
 .swiper-menu .menu-content {
   width: 100%;
-  background: #b9edf8;
-  min-height: 30%;
-  border-bottom: 1rpx solid #e5e5e5;
-  border-radius: 10rpx;
+  background: #fff;
+  min-height: 20vh;
   overflow: hidden;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+}
+
+.weui-grid__label {
+  color: #3d3d3b;
+  font-weight: 200;
 }
 
 .swiper-menu .menu-content .menu-item, .menu-item-disable {
@@ -35,6 +39,7 @@
 
 .menu-item-disable view.weui-grid__label {
   color: #9c9c9c;
+  font-weight: 200;
 }
 
 .swiper-menu .menu-content .menu-item .menu-item-img {
@@ -83,7 +88,7 @@
 /* 图书借阅  */
 
 .borrow-container {
-  padding:40rpx ;
+  padding: 40rpx;
   margin: 0 auto;
   border: 10rpx solid red;
   /* width: 90%; */
@@ -91,9 +96,9 @@
 
 .borrow-header {
   text-align: center;
-  font-size:40rpx;
+  font-size: 40rpx;
 }
 
 .borrow-main {
-  font-size:28rpx;
+  font-size: 28rpx;
 }

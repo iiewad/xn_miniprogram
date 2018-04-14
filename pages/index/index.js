@@ -18,7 +18,7 @@ Page({
       },
       {
         name: '电费查询',
-        imagePath: '../../images/menu-energy-charge.png',
+        imagePath: '../../images/df.png',
         funcName: 'df',
         funcStatus: true
       },
