@@ -131,9 +131,9 @@ Page({
     book.getBorrowData((books) => {
       var str, state, infos = [], borrowBooksInfo = {};
       for (var i in books) {
-        state = books[i].disDay.isWarning;
-        if (state == 0 || state == 1) {
-          str = '《' + books[i].ShuName + '》 ' + books[i].disDay.value;
+        status = books[i].warning.status;
+        if (status > 0) {
+          str = '《' + books[i].ShuName + '》 ' + books[i].warning.value;
           infos.push(str);
         }
       }
@@ -145,6 +145,19 @@ Page({
         });
       }
     });
+  },
+  /**
+   * 温馨提示处理函数
+   */
+  onWarningTap(e) {
+    wx.navigateTo({
+      url: 'jy/jy',
+    })
+  },
+  onTimeTableTab(e) {
+    wx.navigateTo({
+      url: 'kb/kb',
+    })
   },
   /**
    * 获取当前学期

@@ -13,9 +13,9 @@
         <label>归还日期：</label>
         {{item.yhrq}}
       </view>
-      <view class="{{item.disDay.isWarning<2?'warning':''}}">
+      <view class="{{item.warning.status>0?'warning':''}}">
         <label>距归还：</label>
-        {{item.disDay.value}}
+        {{item.warning.value}}
       </view>
       <view class="borrow-state">
         <label>状态：</label>

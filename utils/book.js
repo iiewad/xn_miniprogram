@@ -18,7 +18,7 @@ class Book {
     }
   }
   /**
-   * 获取借阅图书数据
+   * 从Api获取借阅图书数据
    */
   getBorrowData(callback) {
     var that = this;
@@ -30,33 +30,42 @@ class Book {
     };
     util.requestQuery(url_str, params, 'GET', (res) => {
       var data = res.data.data.TList;
-      var books = this.addDisDayPro(data);
+      var books = this.addProWarning(data);
       wx.setStorageSync('borrowInfo', books);
       callback && callback(books);
     })
   }
   /**
-   * 添加 距归还 属性
+   * 添加 警告 属性
    */
-  addDisDayPro(books) {
-    var disDay = {};
+  addProWarning(books) {
+    var warning = {};
     for (var i in books) {
-      var dD = this.countDistanceDay(books[i].yhrq);
-      if (dD <= 0) {
-        disDay.isWarning = 0;
-        disDay.value = '逾期 '
-        disDay.value += -1 * dD + 1 + ' 天';
-      } else if (dD <= 5) {
-        disDay.isWarning = 1;
-        disDay.value = '还剩 ' + dD + ' 天';
+
+      // 测试，记得删
+      // books[i].lx = '还回';
+
+      if (books[i].lx == '还回') {
+        warning.status = 3;
+        warning.value = '已还回，但欠费 ' + books[i].yfje + ' 元';
       } else {
-        disDay.isWarning = 2;
-        disDay.value = '还剩 ' + dD + ' 天';
+        var dD = this.countDistanceDay(books[i].yhrq);
+        if (dD <= 0) {
+          warning.status = 2;
+          warning.value = '逾期 ';
+          warning.value += -1 * dD + 1 + ' 天';
+        } else if (dD <= 5) {
+          warning.status = 1;
+          warning.value = '还剩 ' + dD + ' 天';
+        } else {
+          warning.status = 0;
+          warning.value = '还剩 ' + dD + ' 天';
+        }
       }
       // 解决对象赋值 传递引用问题
-      books[i].disDay = {};
-      for (var j in disDay) {
-        books[i].disDay[j] = disDay[j];
+      books[i].warning = {};
+      for (var j in warning) {
+        books[i].warning[j] = warning[j];
       }
     }
     return books;

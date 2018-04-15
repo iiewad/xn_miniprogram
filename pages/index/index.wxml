@@ -24,16 +24,18 @@
   <block wx:if="{{borrowBooksInfo.state}}">
     <view class="borrow-container">
       <view class="borrow-header">
-        即将到期或逾期未还图书
+        温馨提示
       </view>
-      <view class="borrow-main" wx:for="{{borrowBooksInfo.infos}}">
-        <text>{{index+1}}、{{item}}</text>
+      <view class="borrow-main">
+        <view class="borrow-item" bindtap="onWarningTap" wx:for="{{borrowBooksInfo.infos}}" wx:key="">
+          <text>{{index+1}}、{{item}}</text>
+        </view>
       </view>
     </view>
   </block>
 
   <!-- 今天课表  -->
-  <view class="timetable">
+  <view class="timetable" bindtap="onTimeTableTab">
     <view class="title">今天课表</view>
     <template is="timetables" data="{{course:todayTable}}"></template>
   </view>
