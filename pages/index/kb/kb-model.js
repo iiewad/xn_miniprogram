@@ -47,15 +47,22 @@ class Kb {
     }
   }
   /**
-   * 获取本学期
+   * 获取本学期 的 index
+   */
+  getCurrentTermIndex(terms) {
+    // 根据经验，本学期通常为api数据的最后一个元素
+    return terms.length - 1;
+  }
+  /**
+   * 获取本学期 具体值
    */
   getCurrentTerm(terms) {
     if (!(terms instanceof Array)) {
       return -1;
     }
     // 这里要判断res吧，不存在抛异常
-    var currentTerm = terms[terms.length - 1];    // 根据经验，本学期通常为api数据的最后一个元素
-    // TODO:考虑如何清学期缓存
+    var index = this.getCurrentTermIndex(terms);
+    var currentTerm = terms[index];
     return currentTerm;
   }
   /**

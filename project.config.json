@@ -1,110 +1,116 @@
 {
-  "description": "项目配置文件。",
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "newFeature": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "1.9.91",
-  "appid": "wxbc23727752384330",
-  "projectname": "xnqn_service",
-  "isGameTourist": false,
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": -1,
-      "list": [
-        {
-          "id": -1,
-          "name": "bind_user_page",
-          "pathName": "pages/bind_user/bind_user",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "news",
-          "pathName": "pages/news/news",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "show_news",
-          "pathName": "pages/news/show_news/show_news",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "cj",
-          "pathName": "pages/index/cj/cj",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "df",
-          "pathName": "pages/index/df/df",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "df_success",
-          "pathName": "pages/index/df/msg_success",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "kb",
-          "pathName": "pages/index/kb/kb",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "ykt",
-          "pathName": "pages/index/ykt/ykt",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "Brrows",
-          "pathName": "pages/index/jy/jy",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "showDF",
-          "pathName": "pages/index/df/msg_success",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "feedback",
-          "pathName": "pages/me/feedback/feedback",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "me",
-          "pathName": "pages/me/me",
-          "query": ""
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "wxbc23727752384330",
+	"projectname": "xnqn_service",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 6,
+			"list": [
+				{
+					"id": -1,
+					"name": "bind_user_page",
+					"pathName": "pages/bind_user/bind_user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "news",
+					"pathName": "pages/news/news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "show_news",
+					"pathName": "pages/news/show_news/show_news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "cj",
+					"pathName": "pages/index/cj/cj",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df",
+					"pathName": "pages/index/df/df",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "df_success",
+					"pathName": "pages/index/df/msg_success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "kb",
+					"pathName": "pages/index/kb/kb",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "ykt",
+					"pathName": "pages/index/ykt/ykt",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "Brrows",
+					"pathName": "pages/index/jy/jy",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "showDF",
+					"pathName": "pages/index/df/msg_success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "feedback",
+					"pathName": "pages/me/feedback/feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "me",
+					"pathName": "pages/me/me",
+					"query": ""
+				},
+				{
+					"id": 12,
+					"name": "test",
+					"pathName": "pages/test/test",
+					"query": ""
+				}
+			]
+		}
+	}
 }
