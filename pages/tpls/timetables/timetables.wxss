@@ -3,7 +3,7 @@
 }
 
 .kb-item {
-  width: 95%;
+   /* width: 95%;  */
   height: 260rpx;
   background-color: #f1f1f1;
   margin: 10rpx auto;
@@ -27,7 +27,7 @@
 
 .null-kb {
   background-color: #fff;
-  width: 95%;
+  /* width: 95%; */
   height: 60rpx;
   font-size: 36rpx;
   margin: 0 auto;

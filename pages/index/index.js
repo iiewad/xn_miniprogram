@@ -129,7 +129,7 @@ Page({
    */
   getBorrowsBooks() {
     book.getBorrowData((books) => {
-      var str, state, infos = [], borrowBooksInfo = {};
+      var str, status, infos = [], borrowBooksInfo = {};
       for (var i in books) {
         status = books[i].warning.status;
         if (status > 0) {

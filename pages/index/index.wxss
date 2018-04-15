@@ -80,7 +80,7 @@
   /* min-height: 300px; *//* position:  */
 }
 
-.title {
+.timetable-title {
   text-align: center;
   font-size: 40rpx;
 }
