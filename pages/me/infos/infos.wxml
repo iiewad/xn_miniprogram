@@ -63,7 +63,7 @@
       <view class="item-box">
         <view class="label">手机号码</view>
         <view class="body {{focus[0]==1?'focus':''}}">
-          <input data-index="0" value="15581646116" bindblur="blurInput" bindfocus="focusInput"></input>
+          <input data-index="0" bindblur="blurInput" bindfocus="focusInput"></input>
         </view>
       </view>
     </view>
@@ -74,7 +74,7 @@
       <view class="item-box">
         <view class="label">邮箱</view>
         <view class="body {{focus[1]==1?'focus':''}}">
-          <input data-index="1" value="1017990427@qq.com" bindblur="blurInput" bindfocus="focusInput"></input>
+          <input data-index="1" bindblur="blurInput" bindfocus="focusInput"></input>
         </view>
       </view>
     </view>
