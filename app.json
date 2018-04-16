@@ -13,7 +13,8 @@
     "pages/index/ykt/ykt",
     "pages/index/ykt/showBrows",
     "pages/index/jy/jy",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/me/infos/infos"
   ],
   "tabBar": {
     "list": [

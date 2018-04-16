@@ -2,7 +2,7 @@
 <view class="container">
 
   <view class="weui-cells user-header">
-    <view class="weui-cell">
+    <view class="weui-cell" bindtap="onInfosTap">
       <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
         <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" />
       </view>

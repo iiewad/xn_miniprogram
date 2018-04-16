@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="title">
+    <text>住址信息</text>
+    <text class="notice">(* 绑定后可享受一键查电费)</text>
+  </view>
+  <view class="main">
+    <view class="item">
+      <view class="item-box">
+        <view class="label">
+          公寓
+        </view>
+        <view class="body">
+          <picker value="{{aIndex}}" range="{{apartmentList}}">
+            <view>{{apartmentList[aIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="item-box">
+        <view class="label">
+          楼栋
+        </view>
+        <view class="body">
+          <picker value="{{bIndex}}" range="{{buildList}}">
+            <view>{{buildList[bIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="item-box">
+        <view class="label">
+          楼层
+        </view>
+        <view class="body">
+          <picker value="{{fIndex}}" range="{{floorList}}">
+            <view>{{floorList[fIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="item-box item-last">
+        <view class="label">房号</view>
+        <view class="body">
+          <picker value="{{rIndex}}" range="{{roomList}}">
+            <view>{{roomList[rIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="title">
+    <text>联系方式</text>
+  </view>
+  <view class="main">
+    <view class="item">
+      <view class="item-box">
+        <view class="label">手机号码</view>
+        <view class="body {{focus[0]==1?'focus':''}}">
+          <input data-index="0" value="15581646116" bindblur="blurInput" bindfocus="focusInput"></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="main">
+    <view class="item">
+      <view class="item-box">
+        <view class="label">邮箱</view>
+        <view class="body {{focus[1]==1?'focus':''}}">
+          <input data-index="1" value="1017990427@qq.com" bindblur="blurInput" bindfocus="focusInput"></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="submit">
+    <button>保存</button>
+  </view>
+
+</view>

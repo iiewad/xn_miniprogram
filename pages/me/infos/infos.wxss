@@ -1,0 +1,73 @@
+.container {
+  background-color: #ededed;
+  min-height: 100vh; /* 手机一屏高 *//*阴影效果  */
+}
+
+.title {
+  font-size: 36rpx;
+  margin-left: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.notice {
+  font-size: 28rpx;
+  color: red;
+}
+
+.main {
+  line-height: 100rpx;
+  font-size: 36rpx;
+}
+
+.item {
+  background: #fff;
+}
+
+.item-box {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 2rpx solid #ededed;
+}
+
+.item-last {
+  border-bottom: none;
+}
+
+.label {
+}
+
+.body {
+  width: 70%;
+  text-align: right;
+  /* font-style: italic; */
+}
+
+.focus {
+  width: 60%;
+  text-align: left;
+}
+
+.body input {
+  height: 90rpx;
+}
+
+.submit {
+  position: fixed;
+  bottom: 6%;
+  width: 100%;
+  margin-top: 30rpx;
+  background-color: #1f6ed4;
+  border: 1px solid #fff;
+  margin: 30rpx auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+}
+
+.submit button {
+  border: none;
+  width: 100%;
+  background-color: #1f6ed4;
+  color: #f0f0f0;
+}
