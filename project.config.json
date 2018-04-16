@@ -109,6 +109,12 @@
 					"name": "电费查询结果",
 					"pathName": "pages/index/df/result/result",
 					"query": "roomID=N1291556967&time=2018-4"
+        },
+        {
+          "id": -1,
+					"name": "借阅",
+					"pathName": "pages/index/jy/jy",
+					"query": ""
 				}
 			]
 		}

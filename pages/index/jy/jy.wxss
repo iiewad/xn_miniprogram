@@ -1,35 +1,50 @@
 /* pages/index/jy/jy.wxss */
 
+.container {
+  min-height: 100vh;
+  background-color: #e6e6e6;
+}
+
 .borrow-list {
   width: 100%;
-  height: 100vh;
-  position: fixed;
-  background-color: #e6e6e6;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 10rpx;
 }
 
 .borrow-item {
   width: 95%;
-  /* height: 275rpx; */
   margin: 20rpx auto;
   font-size: 32rpx;
-  background-color: #d6b572;
+  background: #FFFFFF;
   color: #03243a;
-  border-radius: 10rpx;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+  padding-bottom: 10rpx;
 }
 
-.borrow-item view {
-  height: 50rpx;
+.book-name {
+  width: 100%;
+  min-height: 100rpx;
+  line-height: 100rpx;
+  font-size: 38rpx;
+  font-weight: 500;
+  background: #1F6ED4;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.borrow-date, .back-date, .borrow-status, .borrow-yfje {
+  margin: 10rpx auto;
+  width: 100%;
+  font-size: 28rpx;
   padding-left: 20rpx;
-  padding-right: 20rpx;
-  text-align: right;
-  line-height: 50rpx;
-  margin: 5rpx 0;
-  border-bottom: 1px solid #efebd9;
+  height: 50rpx;
 }
 
-.borrow-item view label {
-  float: left;
+.borrow-yfje {
+  color: #C1292E;
 }
+
 
 .warning {
   background-color: red;
