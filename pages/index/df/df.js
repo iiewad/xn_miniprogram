@@ -128,8 +128,7 @@ Page({
     var params = {};
     params.priDormId = priDormId;
     util.requestQuery(url_str, params, 'GET', function(res) {
-      console.log(res.data);
-      that.setRoomList(res.data.roomList, addressType);
+      that.setRoomList(res.data.data, addressType);
       wx.hideLoading();
       return true;
     }, function(res) {
