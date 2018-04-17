@@ -1,0 +1,66 @@
+<view class="container">
+
+  <view class="top-layout">
+    <view class="energy-balance-layout">
+      <view class="energy-icon">
+        <image src="../../../../images/df.png"></image>
+      </view>
+      <view class="energy-data">
+        <view class="energy-balance">当前剩余：{{hoursBillsObj.current_balance}}</view>
+        <view class="energy-price">当前电价：{{hoursBillsObj.energy_price}}</view>
+        <view class="warning" hidden="{{warningHidden}}">
+          （ * 剩余电费不足10元！）
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 每天电费  -->
+  <view class="energy-layout" hidden="{{currentTabsIndex!=0}}">
+    <view class="energy-table-header">
+      <view class="energy-t-h-date">日期</view>
+      <!-- <view class="energy-t-h-energy">当日电费</view> -->
+      <view class="energy-t-h-balance">当日电费(元)</view>
+    </view>
+    <view class="energy-card" wx:for="{{daysBills}}" wx:key="">
+      <view class="card-date">
+        {{item.consumer_date}}
+      </view>
+      <!-- <view class="card-used-energy">
+        {{item.used_energy}}
+      </view> -->
+      <view class="card-balance">
+        <!-- {{item.balance}} -->
+        {{item.used_energy}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 每小时电费  -->
+  <view class="energy-layout" hidden="{{currentTabsIndex!=1}}">
+    <view class="energy-table-header">
+      <view class="energy-t-h-date">时间</view>
+      <view class="energy-t-h-balance">剩余(元)</view>
+    </view>
+    <view class="energy-card" wx:for="{{hoursBillsObj.consumer_hour_records}}" wx:key="">
+      <view class="card-date">
+        {{item.datetime}}
+      </view>
+      <!-- <view class="card-used-energy">
+        {{item.balance}}
+      </view> -->
+      <view class="card-balance">
+        {{item.balance}}
+      </view>
+    </view>
+  </view>
+
+
+  <!-- tab栏  -->
+  <view class="tabs-box">
+    <block wx:for="{{tabs}}" wx:key="">
+      <view class="tabs-item {{currentTabsIndex==index?'selected':''}}" data-index="{{index}}" bindtap="onTapsItemTap">{{item}}</view>
+    </block>
+  </view>
+</view>

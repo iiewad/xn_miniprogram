@@ -1,4 +1,3 @@
-<!--pages/index/df/df.wxml-->
 <view class="container">
   <view class="df-form">
     <view class="form-item form-date">
@@ -58,7 +57,7 @@
   </view>
 
   <view class="query-button">
-    <button bindtap="getDf" data-params="energyQuery">查询</button>
+    <button bindtap="onResultTap" data-params="energyQuery">查询</button>
   </view>
 
 </view>

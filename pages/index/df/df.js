@@ -1,6 +1,8 @@
-// pages/index/df/df.js
 const app = getApp();
 const util = require('../../../utils/util.js');
+
+import { Df } from 'df-model';
+var df = new Df();
 
 Page({
   data: {
@@ -19,11 +21,15 @@ Page({
     energyQuery: '',
     surplusQuery: ''
   },
-  openSuccess: function () {
+  onResultTap: function () {
+    var roomID = this.data.currentRoom.dormid;
+    var time = this.data.currentDate.year + '-' + this.data.currentDate.month;
     wx.navigateTo({
-      url: 'msg_success'
+      url: 'result/result?roomID=' + roomID + '&time=' + time
     });
   },
+
+  
   setQuery(query, queryType) {
     if (queryType == 'energyQuery') {
       this.setData({
@@ -31,7 +37,7 @@ Page({
       });
       this.getDf('surplusQuery');
       return;
-    } else if ( (queryType == 'surplusQuery') && (this.data.surplusQuery == "") ) {
+    } else if ((queryType == 'surplusQuery') && (this.data.surplusQuery == "")) {
       this.setData({
         surplusQuery: query
       })
@@ -39,25 +45,11 @@ Page({
     this.openSuccess();
   },
   getDf: function (e) {
-    var that = this;
-    var userInfo = wx.getStorageSync('stu_userinfo');
-    var url = app.globalData.url + '/api/get_energy_query';
-    var params = {};
-    params.userId = userInfo.cardcode;
-    params.Room = this.data.currentRoom.dormid;
-    params.Time = this.data.currentDate.year + '-' + this.data.currentDate.month;
-    if (e == "surplusQuery") {
-      params.QueryType = e;
-    } else {
-      params.QueryType = e.currentTarget.dataset.params
-    }
-    util.requestQuery(url, params, 'GET', function(res) {
-      that.setQuery(res.data.data, params.QueryType);
-    }, function(res) {
-      console.log('------Failed--------')
-    }, function(res) {
-      console.log('------Complete-------')
-    })
+    var roomID = this.data.currentRoom.dormid;
+    var time = this.data.currentDate.year + '-' + this.data.currentDate.month;
+    df.getBillsPerDay(roomID, time, (daysBills) => {
+      console.log(daysBills);
+    });
   },
   bindDateChange: function (e) {
     console.log(e);
@@ -127,18 +119,20 @@ Page({
     var url_str = app.globalData.url + '/api/get_rooms';
     var params = {};
     params.priDormId = priDormId;
-    util.requestQuery(url_str, params, 'GET', function(res) {
+    util.requestQuery(url_str, params, 'GET', function (res) {
       that.setRoomList(res.data.data, addressType);
       wx.hideLoading();
       return true;
-    }, function(res) {
+    }, function (res) {
       console.log('---------Failed--------');
-    }, function(res) {
+    }, function (res) {
       console.log('---------Complete--------')
     });
   },
 
   onLoad: function (options) {
+
+
     wx.showLoading({
       title: '正在加载'
     });
@@ -153,8 +147,6 @@ Page({
       }
     })
   },
-  onReady: function () {
-  },
 
- 
+
 })

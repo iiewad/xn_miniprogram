@@ -61,6 +61,7 @@ Page({
       roomList: this.data.floorList[index].room,
       fIndex: index
     });
+    console.log(this.data.floorList[index].room);
     this.setRoom(0);
   },
   setRoom(index) {

@@ -8,13 +8,13 @@
     "pages/news/show_news/show_news",
     "pages/index/cj/cj",
     "pages/index/df/df",
-    "pages/index/df/msg_success",
     "pages/index/kb/kb",
     "pages/index/ykt/ykt",
     "pages/index/ykt/showBrows",
     "pages/index/jy/jy",
     "pages/logs/logs",
-    "pages/me/infos/infos"
+    "pages/me/infos/infos",
+    "pages/index/df/result/result"
   ],
   "tabBar": {
     "list": [
