@@ -30,9 +30,7 @@
     </view>
     <view class="item">
       <view class="item-box">
-        <view class="label">
-          楼层
-        </view>
+        <view class="label">楼栋/楼层/宿舍号</view>
         <view class="body">
           <picker bindchange="changeFloor" value="{{fIndex}}" range-key="dormname" range="{{floorList}}">
             <view>{{floorList[fIndex].dormname}}</view>
@@ -40,16 +38,33 @@
         </view>
       </view>
     </view>
-    <view class="item">
-      <view class="item-box item-last">
-        <view class="label">房号</view>
-        <view class="body">
-          <picker bindchange="changeRoom" value="{{rIndex}}" range-key="dormname" range="{{roomList}}">
-            <view>{{roomList[rIndex].dormname}}</view>
-          </picker>
+
+    <block wx:if="{{roomList.length>0}}">
+      <view class="item">
+        <view class="item-box item-last">
+          <view class="label">楼层/宿舍号</view>
+          <view class="body">
+            <picker bindchange="changeRoom" value="{{rIndex}}" range-key="dormname" range="{{roomList}}">
+              <view>{{roomList[rIndex].dormname}}</view>
+            </picker>
+          </view>
         </view>
       </view>
-    </view>
+    </block>
+
+    <block wx:if="{{fiveList.length>0}}">
+      <view class="item">
+        <view class="item-box item-last">
+          <view class="label">宿舍号/名称</view>
+          <view class="body">
+            <picker bindchange="changeFive" value="{{fiveIndex}}" range-key="dormname" range="{{fiveList}}">
+              <view>{{fiveList[fiveIndex].dormname}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </block>
+
   </view>
 
   <view class="title">
@@ -84,7 +99,3 @@
   </view>
 
 </view>
-
-  <loading hidden="{{loadingHidden}}">
-    加载中...
-  </loading>

@@ -32,15 +32,17 @@
   border-bottom: 2rpx solid #ededed;
 }
 
-.item-last {
+/* 设置最有一个元素下划线取消  */
+
+ .item-last {
   border-bottom: none;
-}
+} 
 
 .label {
 }
 
 .body {
-  width: 70%;
+  width: 50%;
   text-align: right;
   /* font-style: italic; */
 }

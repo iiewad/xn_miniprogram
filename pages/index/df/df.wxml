@@ -15,9 +15,9 @@
       <label>
         <image src='../../../images/location.png'></image>
       </label>
-      <picker bindchange="bindApartmentChange" data-name="apartment" value="{{index}}" range="{{apartmentList}}" range-key="{{'dormname'}}">
+      <picker bindchange="changeApartment" value="{{aIndex}}" range="{{apartmentList}}" range-key="{{'dormname'}}">
         <view class="picker">
-          {{currentApart.dormname}}
+          {{apartmentList[aIndex].dormname}}
         </view>
       </picker>
     </view>
@@ -26,9 +26,9 @@
       <label>
         <image src='../../../images/build.png'></image>
       </label>
-      <picker bindchange="bindBuildChange" data-name="build" value="{{index}}" range="{{buildList}}" range-key="{{'dormname'}}">
+      <picker bindchange="changeBuild" value="{{bIndex}}" range="{{buildList}}" range-key="{{'dormname'}}">
         <view class="picker">
-          {{currentBuild.dormname}}
+          {{buildList[bIndex].dormname}}
         </view>
       </picker>
     </view>
@@ -37,27 +37,46 @@
       <label>
         <image src='../../../images/floor.png'></image>
       </label>
-      <picker bindchange="bindFloorChange" data-name="floor" value="{{index}}" range="{{floorList}}" range-key="{{'dormname'}}">
+      <picker bindchange="changeFloor" value="{{fIndex}}" range="{{floorList}}" range-key="{{'dormname'}}">
         <view class="picker">
-          {{currentFloor.dormname}}
+          {{floorList[fIndex].dormname}}
         </view>
       </picker>
     </view>
 
-    <view class="form-item form-room">
-      <label>
-        <image src='../../../images/room.png'></image>
-      </label>
-      <picker bindchange="bindRoomChange" data-name="room" value="{{index}}" range="{{roomList}}" range-key="{{'dormname'}}">
-        <view class="picker">
-          {{currentRoom.dormname}}
-        </view>
-      </picker>
-    </view>
+    <block wx:if="{{roomList.length>0}}">
+      <view class="form-item form-room">
+        <label>
+          <image src='../../../images/room.png'></image>
+        </label>
+        <picker bindchange="changeRoom" value="{{rIndex}}" range="{{roomList}}" range-key="{{'dormname'}}">
+          <view class="picker">
+            {{roomList[rIndex].dormname}}
+          </view>
+        </picker>
+      </view>
+    </block>
+
+    <block wx:if="{{fiveList.length>0}}">
+      <view class="form-item form-room">
+        <label>
+          <image src='../../../images/room.png'></image>
+        </label>
+        <picker bindchange="changeFive" value="{{fiveIndex}}" range="{{fiveList}}" range-key="{{'dormname'}}">
+          <view class="picker">
+            {{fiveList[fiveIndex].dormname}}
+          </view>
+        </picker>
+      </view>
+    </block>
+
+
   </view>
 
+  <view class="query-button setAddress">
+    <button bindtap="onUserInfosTap">绑定宿舍|修改绑定</button>
+  </view>
   <view class="query-button">
     <button bindtap="onResultTap" data-params="energyQuery">查询</button>
   </view>
-
 </view>

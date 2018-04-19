@@ -1,9 +1,8 @@
-/* pages/index/df/df.wxss */
 .container {
   background-color: #fefefe;
   width: 100%;
   min-height: 100vh;
-  padding-top: 15vh; 
+  padding-top: 15vh;
 }
 
 .df-form {
@@ -44,16 +43,20 @@
 }
 
 .query-button {
-  background-color: #1F6ED4;
-  border: 1px solid #ffffff;
+  background-color: #1f6ed4;
+  border: 1px solid #fff;
   width: 90%;
   margin: 30rpx auto;
-  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);  
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
 
 .query-button button {
   border: none;
   width: 100%;
-  background-color: #1F6ED4;
-  color: #f0f0f0;  
+  background-color: #1f6ed4;
+  color: #f0f0f0;
+}
+
+.setAddress button{
+  background-color: #1AAD19;  
 }

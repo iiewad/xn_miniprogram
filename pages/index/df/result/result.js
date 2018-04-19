@@ -14,6 +14,7 @@ Page({
       title: '加载中'
     });
     // 要传查询宿舍数据
+    let roomName = options.roomName;
     var roomID = options.roomID;
     var time = options.time;
     df.getBillsPerDay(roomID, time, (daysBills) => {
