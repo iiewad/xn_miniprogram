@@ -4,6 +4,7 @@
     "pages/news/news",
     "pages/me/me",
     "pages/me/feedback/feedback",
+    "pages/about_us/about_us",
     "pages/bind_user/bind_user",
     "pages/news/show_news/show_news",
     "pages/index/cj/cj",

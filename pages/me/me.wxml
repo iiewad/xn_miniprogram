@@ -32,7 +32,7 @@
     </view>
 
     <view class="weui-cells">
-      <navigator>
+      <navigator url="../about_us/about_us">
         <view class="weui-cell">
           <view class="weui-cell__hd">
             <image src="../../images/about.png"></image>
