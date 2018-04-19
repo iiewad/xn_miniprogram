@@ -1,52 +1,75 @@
 /* pages/index/ykt/ykt.wxss */
 
 .container {
-  position: fixed;
-  height: 100vh;
+  background-color: #fefefe;
+  max-height: 100vh;
   width: 100%;
 }
 
 .ykt-layout {
+  height: 100vh;
   padding-top: 50rpx;
 }
 
-input {
-  padding-left: 15%;
+.ykt-form {
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
 
 .form-item {
-  width: 80%;
+  width: 100%;
   height: 100rpx;
-  margin: 20rpx auto;
-  padding-left: 50rpx;
-  border: 1px solid #f3f3f3;
-  font-size: 38rpx;
+  display: flex;
+  flex-wrap: nowrap;
   line-height: 100rpx;
-  border-radius: 20rpx;
+  border-top: 1px solid #fafafa;
+  border-bottom: 1px solid #fafafa;
+  text-align: center;
 }
 
-.picker {
-  color: #032030;
+.form-item label {
+  width: 30%;
+  border-right: 1px solid #fafafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.picker text {
-  padding-left: 15%;
+.form-item label image {
+  width: 48rpx;
+  height: 48rpx;
 }
 
-.query {
-  width: 85%;
+.form-item picker {
+  width: 70%;
+}
+
+.query-button, .lose-button {
+  background-color: #1F6ED4;
+  border: 1px solid #ffffff;
+  width: 90%;
+  margin: 30rpx auto;
+  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);  
+}
+
+.query-button button {
   border: none;
-  background-color: #1794a5;
-  color: #eff1f3;
-  margin-top: 50rpx;
+  width: 100%;
+  background-color: #1F6ED4;
+  color: #f0f0f0;  
 }
 
-.loss {
-  width: 85%;
+.lose-button {
+  background-color: #E8222D;
+}
+
+.lose-button button {
   border: none;
-  background-color: #D11C16;
-  color: #eff1f3;
-  margin-top: 50rpx;
+  width: 100%;
+  background-color: #E8222D;
+  color: #f0f0f0;  
 }
 
 .input {

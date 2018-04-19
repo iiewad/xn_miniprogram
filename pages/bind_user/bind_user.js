@@ -6,6 +6,16 @@ Page({
     hasUserInfo: false,
     canIUse: true
   },
+
+  showPopup() {
+    let popupComponent = this.selectComponent('.J_Popup');
+    popupComponent && popupComponent.show();
+  },
+  hidePopup() {
+    let popupComponent = this.selectComponent('.J_Popup');
+    popupComponent && popupComponent.hide();
+  },
+  
   formSubmit: function (e) {
     wx.showToast({
       title: '加载中',

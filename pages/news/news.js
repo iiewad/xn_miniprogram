@@ -48,10 +48,10 @@ Page({
         var news = {};
         news.pages = res.data.data.page;
         news.news_list = res.data.data.news;
-        news.news_list.forEach((item) => {
+        /*news.news_list.forEach((item) => {
           if(item.title.length > 17)
           {item.title = item.title.substring(0, 16) + '...';}
-        });
+        });*/
         this.setNewsInfo(news);
         return true;
       }

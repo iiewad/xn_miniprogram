@@ -22,12 +22,12 @@
 
   <!-- 图书借阅情况  -->
   <block wx:if="{{borrowBooksInfo.state}}">
-    <view class="borrow-container">
+    <view class="borrow-container" bindtap="onWarningTap">
       <view class="borrow-header">
         温馨提示
       </view>
       <view class="borrow-main">
-        <view class="borrow-item" bindtap="onWarningTap" wx:for="{{borrowBooksInfo.infos}}" wx:key="">
+        <view class="borrow-item" wx:for="{{borrowBooksInfo.infos}}" wx:key="">
           <text>{{index+1}}、{{item}}</text>
         </view>
       </view>
@@ -36,7 +36,7 @@
 
   <!-- 今天课表  -->
   <view class="timetable" bindtap="onTimeTableTab">
-    <view class="timetable-title">今天课表</view>
+    <view class="timetable-title">今日课表</view>
     <template is="timetables" data="{{course:todayTable}}"></template>
   </view>
 

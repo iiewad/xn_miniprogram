@@ -1,0 +1,47 @@
+/* pages/about_us/about_us.wxss */
+
+.container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  padding-top: 50rpx;
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logo view {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo .des {
+  margin-top: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logo .des .title {
+  font-size: 42rpx;
+  font-weight: 400;
+  color: #252A34;
+}
+
+.logo .des .version {
+  font-size: 32rpx;
+  color: #393E46;
+}
+
+.logo image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 35rpx;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 120, .2);
+}
+
+.about-form {
+  margin-top: 40rpx;
+}
