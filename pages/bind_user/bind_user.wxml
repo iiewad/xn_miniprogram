@@ -1,10 +1,11 @@
 <view class="container">
 
-
   <view class="binduser-header">
     <view class="binduser-info">
-      <image class="xnqn-logo" src="../../images/logo.png" background-size="cover"></image>
-      <text class="xnqn-des">校园服务权限认证</text>
+      <view class="xnqn-logo">
+        <image src="../../images/logo.png" background-size="cover"></image>
+      </view>
+      <view class="xnqn-des">校园服务权限认证</view>
     </view>
   </view>
 
@@ -16,10 +17,35 @@
       <view class="stu-password-view">
         <input name="stu_password" placeholder-class='stu_info_placeholder' type="password" placeholder="请输入密码" />
       </view>
-      
+
+      <view class="form-help">
+        <image src="../../images/help.png" bindtap="showPopup"></image>
+        <view bindtap="showPopup">帮助</view>
+      </view>
+
       <view class="btn-area form-button-view">
         <button formType="submit" class="send-form-button">立即绑定</button>
       </view>
     </form>
   </view>
+
+  <wxc-popup class="J_Popup" animation-mode="center" align="center">
+    <view class="popup__content">
+      <view class="help-title">帮助</view>
+      <view class="help-content">
+        <view class="help-list">
+          <view class="help-p">
+            <view>1. 账号和密码?</view>
+            <view>  账号：学号</view>
+            <view>  密码：与掌上校园App一致</view>
+            <view>  初始密码：身份证号码后六位数字</view>
+            <view>  (如身份证最后一位为字母，</view>
+            <view>  初始密码向前移一位)</view>
+            <view>2. 密码重置？</view>
+            <view>  请拨打：0731-84617888</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </wxc-popup>
 </view>
