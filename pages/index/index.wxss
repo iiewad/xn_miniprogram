@@ -4,25 +4,25 @@
 .container {
   width: 100%;
   height: 100vh;
-  /* position: fixed;  */
+  background-color: #F1F1F1;
 }
 
 .swiper-menu {
   height: 30%;
-  padding: 15rpx 10rpx 10rpx;
+  /*padding: 15rpx 10rpx 10rpx;*/
+  box-shadow: 0px 10rpx 40rpx -10rpx rgba(0, 64, 64, 0.2);
 }
 
 .swiper-menu .menu-content {
   width: 100%;
+  height: 100%;
   background: #fff;
-  min-height: 20vh;
   overflow: hidden;
-  box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
 
 .weui-grid__label {
   color: #3d3d3b;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .swiper-menu .menu-content .menu-item, .menu-item-disable {
@@ -77,30 +77,39 @@
 }
 
 .timetable {
-  /* min-height: 300px; *//* position:  */
+  box-shadow: 0px 10rpx 40rpx -10rpx rgba(0, 64, 128, 0.2);
 }
 
 .timetable-title {
   text-align: center;
   font-size: 40rpx;
+  height:80rpx;
+  background: #50C1E9;
+  line-height: 80rpx;
+  color: #FCFCFC;
 }
 
 /* 图书借阅  */
 
 .borrow-container {
-  padding: 40rpx;
-  margin: 0 auto;
-  border: 10rpx solid red;
+  margin: 20rpx auto;
+  background-color: #FFFFFF;
+  box-shadow: 0px 10rpx 40rpx -10rpx rgba(0, 64, 128, 0.2);
   /* width: 90%; */
 }
 
 .borrow-header {
   text-align: center;
   font-size: 40rpx;
+  background: #F71E35;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #FCFCFC;
 }
 
 .borrow-main {
   line-height: 60rpx;
+  padding: 40rpx;
 }
 
 .borrow-item {
