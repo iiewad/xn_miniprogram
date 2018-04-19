@@ -4,9 +4,23 @@
     <view class="feedback__title">
       <input type="text" placeholder-class="feedback__title__placeholder" placeholder="反馈标题" bindblur="feedBackTitleBind"></input>
     </view>
-    <view class="feedback__des">
-      <textarea placeholder-class="feedback__des__placeholder" placeholder="问题描述：最多140字" bindblur="feedBackDesBind"></textarea>
+    <textarea class="feedback__des" placeholder-class="feedback__des__placeholder" placeholder="问题描述：最多140字" bindblur="feedBackDesBind"></textarea>
+
+    <view class="feedback__contact">
+      <input type="text" placeholder-class="feedback__contact__placeholder" placeholder="请留下您的联系方式，以便我们排查问题" bindblur="feedBackContactBind"></input>
     </view>
+
+    <view class="feedback__upload-image">
+      <block wx:for="{{files}}" wx:key="*this">
+        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+        </view>
+      </block>
+      <view class="weui-uploader__input-box">
+        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+      </view>
+    </view>
+
     <view class="feedback-button">
       <button bindtap="submitFeedBack">提交</button>
     </view>
@@ -14,4 +28,17 @@
     <wxc-dialog class="wxc-dialog" title="反馈结果" content="{{feedbackRes}}" confirm-text="知道了" bindconfirm="onConfirm" bindcancel="onCancel"></wxc-dialog>
 
   </view>
+
+  <!--<view class="feedback-items">
+    <view class="items-title">我的反馈记录：</view>
+    <view class="fb-item">
+      1. 这是第一条反馈
+    </view>
+    <view class="fb-item">
+      2. 这是第一条反馈
+    </view>
+    <view class="fb-item">
+      3. 这是第一条反馈
+    </view>
+  </view>-->
 </view>

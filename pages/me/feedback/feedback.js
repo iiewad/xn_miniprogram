@@ -10,7 +10,29 @@ Page({
   data: {
     feedBackTitle: '',
     feedBackDes: '',
-    feedbackRes: ''
+    feedBackContact: '',
+    feedbackRes: '',
+    files: []
+  },
+
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        that.setData({
+          files: that.data.files.concat(res.tempFilePaths)
+        });
+      }
+    })
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
   },
 
   showDialog() {
@@ -44,23 +66,47 @@ Page({
     this.setData({
       feedBackDes: e.detail.value
     });
+  },
 
+  feedBackContactBind: function (e) {
+    console.log(e);
+    this.setData({
+      feedBackContact: e.detail.value
+    });
   },
 
   submitFeedBack: function () {
     var feedBackTitle = this.data.feedBackTitle;
     var feedBackDes = this.data.feedBackDes;
+    var feedBackContact = this.data.feedBackContact;
     if (feedBackTitle === '') {
       console.warn('Title Empty');
+      wx.showToast({
+        title: '请填写反馈标题',
+        icon: 'none'
+      })
       return false;
     } else if (feedBackDes === '') {
-      console.warn('Des Empty');
+      wx.showToast({
+        title: '请填写反馈内容',
+        icon: 'none'
+      })
+      return false;
+    } else if (feedBackContact === '') {
+      wx.showToast({
+        title: '请留下您的联系方式',
+        icon: 'none'
+      });
       return false;
     }
+
+    var feedBackImages = this.data.files;
 
     var data = {}
     data.title = feedBackTitle;
     data.content = feedBackDes;
+    data.contact_number = feedBackContact;
+    data.contact_image = feedBackImages;
     var url_str = app.globalData.url + '/api/feedback';
     var that = this;
     wx.getStorage({
