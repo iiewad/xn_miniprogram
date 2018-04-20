@@ -2,10 +2,7 @@ const app = getApp();
 const util = require('../../../utils/util.js');
 
 import { Room } from '../../../utils/room.js';
-// import { User } from '../../me/user-model.js';
 var room = new Room();
-// var user = new User();
-
 
 Page({
   data: {
@@ -20,9 +17,6 @@ Page({
     fIndex: 0,
     rIndex: 0,
     fiveIndex: 0,
-    indexList: [],
-
-
     currentDate: {
       year: '',
       month: ''
@@ -36,84 +30,150 @@ Page({
         month: currentDate.getMonth() + 1
       }
     })
-    room.getUserRoomData((indexList) => {
-      // 已绑定数据
-      if (indexList && indexList.length > 0) {
-        this.setData({
-          indexList: indexList
-        });
-        this._loadData(true);
+    room.getUserRoomData((dormidList) => {
+      if (dormidList && dormidList.length > 0) {
+        this._loadDataNew(dormidList);
       } else {
-        this._loadData();
-      }
-    });
-
-  },
-  _loadData(setted) {
-    room.getApartments((apartments) => {
-      this.setData({
-        apartmentList: apartments
-      });
-      // 绑定了宿舍或传了宿舍数据
-      if (setted) {
-        let nextIndex = this.data.indexList[0];
-        this.setApartments(nextIndex, true);
-      } else {
-        this.setApartments(0);
+        this.initNew();
       }
     });
   },
-  onUserInfosTap() {
-    // 构造indexList
+  _loadDataNew(dormidList) {
+    dormidList.unshift('');
+    room.getSettedData((list, indexList) => {
+      this.setListData(list, indexList, 5);
+    }, dormidList);
+  },
+  initNew() {
+    let item = '';
+    let num = 5;
     let indexList = [];
-    indexList.push(
-      this.data.aIndex, this.data.bIndex, this.data.fIndex
-    );
-    (this.data.roomList.length > 0) && indexList.push(this.data.rIndex);
-    (this.data.fiveList.length > 0) && indexList.push(this.data.fiveIndex)
-    wx.navigateTo({
-      url: '/pages/me/infos/infos?indexList=' + indexList
-      + '&from=df',
-    })
-  },
-  onResultTap: function () {
-    let dataObj = this.getRoomNameAndID();
-    var time = this.data.currentDate.year + '-' + this.data.currentDate.month;
-    wx.navigateTo({
-      url: 'result/result?roomID=' + dataObj.finalDormid
-      + '&time=' + time + '&roomName=' + dataObj.completeRoomName
-    });
+    for (let i = 0; i < num; i++) {
+      indexList[i] = 0;
+    }
+    this.getRoomData(item, indexList, num);
   },
   /**
-   * 构造完整宿舍名;获取最终dormid
+  * 获取 数据
+  */
+  getRoomData(item, indexList, num) {
+    let dormid = '';
+    if (item) {
+      dormid = item.dormid;
+    }
+    room.getRoomData((list) => {
+      console.log(list);
+      this.setListData(list, indexList, num);
+    }, dormid);
+  },
+  /**
+   * 绑定数据
    */
-  getRoomNameAndID() {
-    let completeRoomName, dormid;
+  setListData(list, indexList, num) {
+    let listKeyArr = [
+      'apartmentList', 'buildList', 'floorList',
+      'roomList', 'fiveList'
+    ];
+    let indexKeyArr = [
+      'aIndex', 'bIndex', 'fIndex', 'rIndex', 'fiveIndex'
+    ];
+    let cut = 5 - num;
+    for (let i = 1; i <= cut; i++) {
+      listKeyArr.shift();
+    }
+    for (let i = 2; i <= cut; i++) {
+      indexKeyArr.shift();
+    }
+    for (let i in listKeyArr) {
+      let bindList = {};
+      if (list[i] && list[i].length > 0) {
+        bindList[listKeyArr[i]] = list[i];
+      } else {
+        bindList[listKeyArr[i]] = [];
+      }
+      this.setData(bindList);
+    }
+    for (let i in indexKeyArr) {
+      let bindIndex = {};
+      if (indexList[i] && indexList[i].length > 0) {
+        bindIndex[indexKeyArr[i]] = indexList[i];
+      } else {
+        bindIndex[indexKeyArr[i]] = 0;
+      }
+      this.setData(bindIndex);
+    }
+  },
+  preSetList(index, num) {
+    let listKeyArr = [
+      'apartmentList', 'buildList', 'floorList',
+      'roomList', 'fiveList'
+    ];
+    let item = this.data[listKeyArr[4 - num]][index];
+    let indexList = [];
+    indexList[0] = index;
+    for (let i = 1; i < num; i++) {
+      indexList[i] = 0;
+    }
+    this.getRoomData(item, indexList, num);
+  },
+  changeApartment(e) {
+    this.preSetList(room.getPickerValue(e), 4);
+  },
+  changeBuild(e) {
+    this.preSetList(room.getPickerValue(e), 3);
+  },
+  changeFloor(e) {
+    this.preSetList(room.getPickerValue(e), 2);
+  },
+  changeRoom(e) {
+    this.preSetList(room.getPickerValue(e), 1);
+  },
+  changeFive(e) {
+    this.preSetList(room.getPickerValue(e), 0);
+  },
+  /**
+   * 跳转 查询结果页
+   */
+  onResultTap() {
+    let dataObj = this.getDataToSearch();
+    let time = this.data.currentDate.year + '-' + this.data.currentDate.month;
+    wx.navigateTo({
+      url: 'result/result?dormidList=' + dataObj.dormidList
+      + '&time=' + time + '&roomName=' + dataObj.roomName
+    });
+  },
+  getDataToSearch() {
+    let roomName, dormidList = [];
     let apartmentList = this.data.apartmentList;
     let buildList = this.data.buildList;
     let floorList = this.data.floorList;
     let roomList = this.data.roomList;
     let fiveList = this.data.fiveList;
-    let currentFloor = floorList[this.data.fIndex];
-    completeRoomName = apartmentList[this.data.aIndex].dormname
-      + buildList[this.data.bIndex].dormname
-      + currentFloor.dormname;
-    dormid = currentFloor.dormid;
-    if (roomList.length > 0) {
-      let currentRoom = roomList[this.data.rIndex];
-      completeRoomName += currentRoom.dormname;
-      dormid = currentRoom.dormid;
+    let cApartment = apartmentList[this.data.aIndex];
+    let cBuild = buildList[this.data.bIndex];
+    let cFloor = floorList[this.data.fIndex];
+    roomName = cApartment.dormname
+      + cBuild.dormname
+      + cFloor.dormname;
+    dormidList.push(
+      cApartment.dormid,
+      cBuild.dormid,
+      cFloor.dormid
+    );
+    if (roomList && roomList.length > 0) {
+      roomName += roomList[this.data.rIndex].dormname;
+      dormidList.push(roomList[this.data.rIndex].dormid);
     }
-    if (fiveList.length > 0) {
-      let currentFive = fiveList[this.data.fiveIndex];
-      completeRoomName += currentFive.dormname;
-      dormid = currentFive.dormid;
+    if (fiveList && fiveList.length > 0) {
+      roomName += fiveList[this.data.fiveIndex].dormname;
+      dormidList.push(fiveList[this.data.fiveIndex].dormid);
     }
     return {
-      completeRoomName: completeRoomName,
-      finalDormid: dormid
+      roomName: roomName,
+      dormidList: dormidList
     };
   },
+
   bindDateChange: function (e) {
     var date = new Date(e.detail.value);
     this.setData({
@@ -123,76 +183,21 @@ Page({
       }
     });
   },
-  setApartments(index, setted) {
-    var id = this.data.apartmentList[index].dormid;
-    room.getCompleteRoomDataList(id, index, (roomDataList) => {
-      this.setData({
-        buildList: roomDataList.build,
-        aIndex: index
-      });
-      setted ? this.setBuild(this.data.indexList[1], true) :
-        this.setBuild(0);
-    });
-  },
-  setBuild(index, setted) {
-    this.setData({
-      floorList: this.data.buildList[index].floor,
-      bIndex: index
-    });
-    setted ? this.setFloor(this.data.indexList[2], true) :
-      this.setFloor(0);
-  },
-  setFloor(index, setted) {
-    let roomList = this.data.floorList[index].room;
-    this.setData({
-      roomList: roomList,
-      fIndex: index
-    });
-    let rIndex = this.data.indexList[3];
-    if (setted && rIndex) {
-      console.log(rIndex);
-      this.setRoom(rIndex, true);
-    } else {
-      this.setRoom(0);
-    }
-  },
-  setRoom(index, setted) {
-    let currentRoom = this.data.roomList[index];
-    let fiveList;
-    if (currentRoom) {
-      fiveList = currentRoom.next_room;
-    } else {
-      fiveList = [];
-    }
-    this.setData({
-      rIndex: index,
-      fiveList: fiveList
-    });
-    let fiveIndex = this.data.indexList[4];
-    if (setted && fiveIndex) {
-      this.setFive(fiveIndex);
-    } else {
-      this.setFive(0);
-    }
-  },
-  setFive(index) {
-    this.setData({
-      fiveIndex: index
-    });
-  },
-  changeApartment(e) {
-    this.setApartments(room.getPickerValue(e));
-  },
-  changeBuild(e) {
-    this.setBuild(room.getPickerValue(e));
-  },
-  changeFloor(e) {
-    this.setFloor(room.getPickerValue(e));
-  },
-  changeRoom(e) {
-    this.setRoom(room.getPickerValue(e));
-  },
-  changeFive(e) {
-    this.setFive(room.getPickerValue(e));
-  },
+
+  // onUserInfosTap() {
+  //   // 构造indexList
+  //   let indexList = [];
+  //   indexList.push(
+  //     this.data.aIndex, this.data.bIndex, this.data.fIndex
+  //   );
+  //   (this.data.roomList.length > 0) && indexList.push(this.data.rIndex);
+  //   (this.data.fiveList.length > 0) && indexList.push(this.data.fiveIndex)
+  //   wx.navigateTo({
+  //     url: '/pages/me/infos/infos?indexList=' + indexList
+  //     + '&from=df',
+  //   })
+  // },
+
+
+
 })

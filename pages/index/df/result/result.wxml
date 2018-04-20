@@ -1,5 +1,14 @@
 <view class="container">
 
+   <view class="room">
+    <view class="room-name">
+      <text>当前查询：{{roomName}}</text>
+    </view>
+    <view class="room-action">
+      <button bindtap="bindAddress">绑定宿舍</button>
+    </view>
+  </view> 
+
   <view class="top-layout">
     <view class="energy-balance-layout">
       <view class="energy-icon">
@@ -11,6 +20,7 @@
         <view class="warning" hidden="{{warningHidden}}">
           （ * 剩余电费不足10元！）
         </view>
+
       </view>
     </view>
   </view>

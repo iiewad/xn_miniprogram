@@ -73,10 +73,10 @@
 
   </view>
 
-  <view class="query-button setAddress">
+  <!-- <view class="query-button setAddress">
     <button bindtap="onUserInfosTap">绑定宿舍|修改绑定</button>
-  </view>
+  </view> -->
   <view class="query-button">
-    <button bindtap="onResultTap" data-params="energyQuery">查询</button>
+    <button bindtap="onResultTap">查询</button>
   </view>
 </view>
