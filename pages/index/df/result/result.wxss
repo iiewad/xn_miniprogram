@@ -3,19 +3,15 @@
   background-color: #f1f1f1;
   min-height: 100vh;
   display: flex;
-  /* flex-direction: row; */
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
 }
 
 .top-layout {
   width: 90%;
   height: 200rpx;
-  /* position: fixed; */
-  margin: 0 auto;
-  padding-top: 6%;
-  /*  */
-
+  position: fixed;
+  padding-top: 2%;
   z-index: 999;
   background-color: #fff;
   box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
@@ -58,7 +54,7 @@
 .energy-layout {
   width: 94%;
   /* padding-top: 240rpx; */
-  padding-top: 6%;
+  padding-top: 32%;
   margin: 0 auto;
 }
 
@@ -140,7 +136,26 @@
 }
 
 .room {
-  /* background: red; */
+  background: #f1f1f1;
+  position: fixed;
+  z-index: 999;
+  bottom: 0%;
   display: flex;
   justify-content: space-between;
+  font-size: 34rpx;
+  min-height: 100rpx;
+  width: 94%;
+}
+
+.room-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+
+.room-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

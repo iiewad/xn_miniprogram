@@ -1,14 +1,5 @@
 <view class="container">
 
-   <view class="room">
-    <view class="room-name">
-      <text>当前查询：{{roomName}}</text>
-    </view>
-    <view class="room-action">
-      <button bindtap="bindAddress">绑定宿舍</button>
-    </view>
-  </view> 
-
   <view class="top-layout">
     <view class="energy-balance-layout">
       <view class="energy-icon">
@@ -67,10 +58,24 @@
   </view>
 
 
+
+  <view class="room">
+    <view bindtap="onRoomTap" class="room-name">
+      <text>{{roomName}}</text>
+    </view>
+    <view class="room-action">
+      <button bindtap="bindAddress" class="mini-btn" type="primary" size="mini">绑定</button>
+    </view>
+  </view>
+
+
+
+
+
   <!-- tab栏  -->
-  <view class="tabs-box">
+  <!-- <view class="tabs-box">
     <block wx:for="{{tabs}}" wx:key="">
       <view class="tabs-item {{currentTabsIndex==index?'selected':''}}" data-index="{{index}}" bindtap="onTapsItemTap">{{item}}</view>
     </block>
-  </view>
+  </view> -->
 </view>

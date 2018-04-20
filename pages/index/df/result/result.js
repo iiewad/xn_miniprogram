@@ -53,6 +53,14 @@ Page({
     });
   },
   /**
+   * 跳转回 宿舍选中页面
+   */
+  onRoomTap() {
+    wx.navigateBack({
+
+    });
+  },
+  /**
    * 绑定查询宿舍为用户宿舍
    */
   bindAddress() {
