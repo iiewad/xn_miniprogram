@@ -53,7 +53,8 @@ App({
 
   globalData: {
     userInfo: null,
-    url: 'https://api.hunau.club',
+    url: 'https://api.xnqn.com',
+    /*url: 'https://api.hunau.club',*/
     /*url: 'http://localhost:3030',*/
     stuUserInfo: ''
   },
