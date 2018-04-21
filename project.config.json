@@ -121,6 +121,12 @@
 					"name": "关于",
 					"pathName": "pages/about_us/about_us",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "电费查询结果",
+					"pathName": "pages/index/df/result/result",
+					"query": ""
 				}
 			]
 		}

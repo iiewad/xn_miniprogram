@@ -8,22 +8,24 @@
 }
 
 .top-layout {
-  width: 90%;
-  height: 200rpx;
+  width: 100%;
+  min-height: 200rpx;
   position: fixed;
-  padding-top: 2%;
   z-index: 999;
   background-color: #fff;
   box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
   display: flex;
   align-items: center;
-  padding-left: 30rpx;
 }
 
 .energy-balance-layout {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+}
+
+.energy-icon {
+  padding: 0 30rpx;
 }
 
 .energy-icon image {
@@ -52,7 +54,7 @@
 }
 
 .energy-layout {
-  width: 94%;
+  width: 95%;
   /* padding-top: 240rpx; */
   padding-top: 32%;
   margin: 0 auto;
@@ -144,7 +146,7 @@
   justify-content: space-between;
   font-size: 34rpx;
   min-height: 100rpx;
-  width: 94%;
+  width: 95%;
 }
 
 .room-name {
