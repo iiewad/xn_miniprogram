@@ -6,7 +6,6 @@ const app = getApp();
 const util = require('util.js');
 
 import { Base } from 'base.js';
-
 class Room extends Base {
   constructor() {
     super();
@@ -15,10 +14,15 @@ class Room extends Base {
     this.submitUrl = app.globalData.url + '/api/bind-room';
   }
   /**
-   * 获取绑定的用户数据
+   * 获取绑定的用户宿舍数据
    */
-  getSettedData(callback, dormidList, data = [], indexList = []) {
+  getSettedData(callback, dormidList, num) {
     let params = {};
+    let dataObj = {
+      list: [],
+      index: 0,
+      num: num
+    };
     let list = [];
     params.priDormId = dormidList[0];
     dormidList.shift(); // 去掉首个后，同层
@@ -26,15 +30,17 @@ class Room extends Base {
       list = res.data.data;
       // 获得的数据是下一组的
       if (list && list.length > 0) {
+        dataObj.list = list;
         for (let i in list) {
           if (list[i].dormid == dormidList[0]) {
-            indexList.push(i);
+            dataObj.index = i;
+            break;
           }
         }
-        data.push(list);
-        this.getSettedData(callback, dormidList, data, indexList);
+        callback && callback(dataObj);
+        this.getSettedData(callback, dormidList, ++num);
       } else {
-        callback && callback(data, indexList);
+        callback && callback(dataObj);
       }
     });
   }
@@ -47,8 +53,12 @@ class Room extends Base {
    *  dormid
    * 
    */
-  getRoomData(callback, dormid, data = []) {
+  getRoomData(callback, dormid, num) {
     let params = {};
+    let obj = {
+      list: [],
+      num: num
+    };
     let list = [];
     let selectedItem = {};
     if (dormid) {
@@ -58,17 +68,11 @@ class Room extends Base {
       list = res.data.data;
       if (list && list.length > 0) {
         selectedItem = list[0];
-        data.push(list);
-
-        /**
-         * 思路：边渲染边从api获取
-         * 获取到一个数据，就返回渲染一个
-         */
-
-
-        this.getRoomData(callback, selectedItem.dormid, data);
+        obj.list = list;
+        callback && callback(obj);
+        this.getRoomData(callback, selectedItem.dormid, ++num);
       } else {
-        callback && callback(data);
+        callback && callback(obj);
       }
     });
   }
@@ -123,120 +127,6 @@ class Room extends Base {
       data[i] && dormidList.push(data[i]);
     }
     return dormidList;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*************************************** */
-  /**
-   * [G1290492858, G1293594334,...] -> [2,1,...]
-   * dormidList -> indexList
-   */
-  setIndexList(dormidList, callback) {
-    let indexList = [];
-    if (dormidList && dormidList.length == 0) {
-      callback && callback(indexList);
-      return;
-    }
-    this.getApartments((apartmentList) => {
-      for (let i in apartmentList) {
-        let apartment = apartmentList[i];
-        if (apartment.dormid == dormidList[0]) {
-          indexList.push(i);
-          this.getCompleteRoomDataList(apartment.dormid, i,
-            (apartmentNext) => {
-              dormidList.shift();
-              let builds = apartmentNext.build;
-              let nextKeyArr = ['floor', 'room', 'next_room'];
-              indexList = this.recu(nextKeyArr, dormidList, builds, indexList);
-              callback && callback(indexList);
-            });
-          break;
-        }
-      }
-    });
-  }
-  /**
-   * 递归构造indexList
-   * 使用递归理由：处理过程一样，下次调用的参数需由上次返回结果提供
-   * @params 
-   *  nextKeyArr : 取首元素后删除 ['floor', 'room', 'five']
-   *  dormidList: 取首元素后删除 ['G1290492858', 'G1293594334', 'G1293594585']
-   *  arr:处理的数据
-   *  indexList: 数组尾添加元素 ["1", "1", "1", "2"]
-   * @return 
-   *  indexList
-   */
-  recu(nextKeyArr, dormidList, arr, indexList) {
-    for (let i in arr) {
-      let value = arr[i];
-      if (value.dormid == dormidList[0]) {
-        indexList.push(i);
-        let nextArr = value[nextKeyArr[0]];
-        if (nextArr && nextArr.length > 0) { // 不等于空数组
-          dormidList.shift();
-          nextKeyArr.shift();
-          indexList = this.recu(nextKeyArr, dormidList, nextArr, indexList);
-        }
-        break;
-      }
-    }
-    return indexList;
-  }
-  /**
-   * 获取公寓
-   */
-  getApartments(callback) {
-    var apartments = wx.getStorageSync('apartments');
-    if (!apartments) {
-      var params = {};
-      util.requestQuery(this.roomUrl, params, 'GET', (res) => {
-        var apartments = res.data.data;
-        wx.setStorageSync('apartments', apartments);
-        callback && callback(apartments);
-      });
-    } else {
-      callback && callback(apartments);
-    }
-  }
-  /**
-   * 获取指定公寓下所有宿舍数据
-   * aID：公寓的
-   * index:在缓存数组中的索引
-   */
-  getCompleteRoomDataList(aID, index, callback) {
-    // 这里必须用let声明，否则报错，未理解
-    let roomDataListAll = wx.getStorageSync('roomDataListAll');
-    var roomDataList = roomDataListAll[index];
-    if (!roomDataList) {
-      var params = {
-        priDormId: aID
-      };
-      util.requestQuery(this.completeRoomDataListUrl, params, 'GET', (res) => {
-        var roomDataList = res.data.data.apartment;
-        console.log(roomDataListAll);
-        if (!roomDataListAll) {
-          roomDataListAll = [];
-        }
-        roomDataListAll[index] = roomDataList;
-        wx.setStorageSync('roomDataListAll', roomDataListAll);
-        callback && callback(roomDataList);
-      });
-    } else {
-      callback && callback(roomDataList);
-    }
   }
 }
 

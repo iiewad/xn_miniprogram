@@ -15,6 +15,15 @@ Page({
     fIndex: 0,
     rIndex: 0,
     fiveIndex: 0,
+    listKeyArr: [
+      'apartmentList', 'buildList', 'floorList',
+      'roomList', 'fiveList'
+    ],
+    indexKeyArr: [
+      'aIndex', 'bIndex', 'fIndex', 'rIndex', 'fiveIndex'
+    ],
+
+
     focus: [],
   },
   onLoad: function (options) {
@@ -26,98 +35,81 @@ Page({
       }
     });
   },
+
   _loadDataNew(dormidList) {
+    let num = 0;
     dormidList.unshift('');
-    room.getSettedData((list, indexList) => {
-      this.setListData(list, indexList, 5);
-    }, dormidList);
+    room.getSettedData((dataObj) => {
+      this.setOneListData(dataObj.list, dataObj.index, dataObj.num);
+    }, dormidList, num);
   },
   initNew() {
     let item = '';
-    let num = 5;
-    let indexList = [];
-    for (let i = 0; i < num; i++) {
-      indexList[i] = 0;
-    }
-    this.getRoomData(item, indexList, num);
+    let num = 0;
+    let index = 0;
+    this.getRoomData(item, index, num);
   },
   /**
   * 获取 数据
   */
-  getRoomData(item, indexList, num) {
+  getRoomData(item, index, num, picker = false) {
     let dormid = '';
     if (item) {
       dormid = item.dormid;
     }
-    room.getRoomData((list) => {
-      console.log(list);
-      this.setListData(list, indexList, num);
-    }, dormid);
-  },
-  /**
-   * 绑定数据
-   */
-  setListData(list, indexList, num) {
-    let listKeyArr = [
-      'apartmentList', 'buildList', 'floorList',
-      'roomList', 'fiveList'
-    ];
-    let indexKeyArr = [
-      'aIndex', 'bIndex', 'fIndex', 'rIndex', 'fiveIndex'
-    ];
-    let cut = 5 - num;
-    for (let i = 1; i <= cut; i++) {
-      listKeyArr.shift();
-    }
-    for (let i = 2; i <= cut; i++) {
-      indexKeyArr.shift();
-    }
-    for (let i in listKeyArr) {
-      let bindList = {};
-      if (list[i] && list[i].length > 0) {
-        bindList[listKeyArr[i]] = list[i];
-      } else {
-        bindList[listKeyArr[i]] = [];
+    room.getRoomData((dataObj) => {
+      if (dataObj.num != num) {
+        index = 0;
       }
-      this.setData(bindList);
-    }
-    for (let i in indexKeyArr) {
-      let bindIndex = {};
-      if (indexList[i] && indexList[i].length > 0) {
-        bindIndex[indexKeyArr[i]] = indexList[i];
-      } else {
-        bindIndex[indexKeyArr[i]] = 0;
-      }
-      this.setData(bindIndex);
-    }
+      this.setOneListData(dataObj.list, index, dataObj.num, picker);
+    }, dormid, num);
   },
+  setOneListData(list, index, num, picker = false) {
+    let listKeyArr = this.data.listKeyArr;
+    let indexKeyArr = this.data.indexKeyArr;
+    let bindList = {};
+    if (list && list.length > 0) {
+      bindList[listKeyArr[num]] = list;
+    } else {
+      // 清除该层及该层一下的数据
+      let length = listKeyArr.length;
+      for (let i = num; i <= length; i++) {
+        let temp = {};
+        temp[listKeyArr[i]] = [];
+        this.setData(temp);
+      }
+    }
+    let bindIndex = {};
+    if (picker) {
+      // picker下，绑定buildlist(1层)和aIndex(0层)
+      bindIndex[indexKeyArr[num - 1]] = index;
+    } else {
+      bindIndex[indexKeyArr[num]] = index;
+    }
+    this.setData(bindIndex);
+    this.setData(bindList);
+  },
+
   preSetList(index, num) {
-    let listKeyArr = [
-      'apartmentList', 'buildList', 'floorList',
-      'roomList', 'fiveList'
-    ];
-    let item = this.data[listKeyArr[4 - num]][index];
-    let indexList = [];
-    indexList[0] = index;
-    for (let i = 1; i < num; i++) {
-      indexList[i] = 0;
-    }
-    this.getRoomData(item, indexList, num);
+    let listKeyArr = this.data.listKeyArr;
+    // 用公寓dormid（0层），获取build数据(1层)
+    let item = this.data[listKeyArr[num - 1]][index];
+    this.getRoomData(item, index, num, true);
   },
   changeApartment(e) {
-    this.preSetList(room.getPickerValue(e), 4);
-  },
-  changeBuild(e) {
-    this.preSetList(room.getPickerValue(e), 3);
-  },
-  changeFloor(e) {
-    this.preSetList(room.getPickerValue(e), 2);
-  },
-  changeRoom(e) {
     this.preSetList(room.getPickerValue(e), 1);
   },
+  changeBuild(e) {
+    this.preSetList(room.getPickerValue(e), 2);
+  },
+  changeFloor(e) {
+    this.preSetList(room.getPickerValue(e), 3);
+  },
+  changeRoom(e) {
+    this.preSetList(room.getPickerValue(e), 4);
+  },
   changeFive(e) {
-    this.preSetList(room.getPickerValue(e), 0);
+    this.preSetList(room.getPickerValue(e), 5);
   },
 
 
