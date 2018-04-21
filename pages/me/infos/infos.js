@@ -27,6 +27,9 @@ Page({
     focus: [],
   },
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    });
     room.getUserRoomData((dormidList) => {
       if (dormidList && dormidList.length > 0) {
         this._loadDataNew(dormidList);
@@ -78,6 +81,7 @@ Page({
         temp[listKeyArr[i]] = [];
         this.setData(temp);
       }
+      wx.hideLoading();
     }
     let bindIndex = {};
     if (picker) {
@@ -91,6 +95,9 @@ Page({
   },
 
   preSetList(index, num) {
+    wx.showLoading({
+      title: '加载中',
+    });
     let listKeyArr = this.data.listKeyArr;
     // 用公寓dormid（0层），获取build数据(1层)
     let item = this.data[listKeyArr[num - 1]][index];

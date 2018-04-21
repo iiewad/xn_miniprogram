@@ -37,9 +37,12 @@ Page({
         month: currentDate.getMonth() + 1
       }
     })
+    wx.showLoading({
+      title: '加载中',
+    });
     room.getUserRoomData((dormidList) => {
+
       if (dormidList && dormidList.length > 0) {
-        // if (0) {
         this._loadDataNew(dormidList);
       } else {
         this.initNew();
@@ -54,6 +57,7 @@ Page({
     }, dormidList, num);
   },
   initNew() {
+
     let item = '';
     let num = 0;
     let index = 0;
@@ -78,6 +82,7 @@ Page({
     let listKeyArr = this.data.listKeyArr;
     let indexKeyArr = this.data.indexKeyArr;
     let bindList = {};
+    let bindIndex = {};
     if (list && list.length > 0) {
       bindList[listKeyArr[num]] = list;
     } else {
@@ -88,8 +93,8 @@ Page({
         temp[listKeyArr[i]] = [];
         this.setData(temp);
       }
+      wx.hideLoading();
     }
-    let bindIndex = {};
     if (picker) {
       // picker下，绑定buildlist(1层)和aIndex(0层)
       bindIndex[indexKeyArr[num - 1]] = index;
@@ -98,9 +103,13 @@ Page({
     }
     this.setData(bindIndex);
     this.setData(bindList);
+
   },
 
   preSetList(index, num) {
+    wx.showLoading({
+      title: '加载中',
+    });
     let listKeyArr = this.data.listKeyArr;
     // 用公寓dormid（0层），获取build数据(1层)
     let item = this.data[listKeyArr[num - 1]][index];
