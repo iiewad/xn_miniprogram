@@ -50,11 +50,21 @@ Page({
   submitFeedBack: function () {
     var feedBackTitle = this.data.feedBackTitle;
     var feedBackDes = this.data.feedBackDes;
+    var feedBackContact = this.data.feedBackContact;
+
     if (feedBackTitle === '') {
       console.warn('Title Empty');
+      wx.showToast({
+        title: '请填写反馈标题',
+        icon: 'none'
+      });
       return false;
     } else if (feedBackDes === '') {
       console.warn('Des Empty');
+      wx.showToast({
+        title: '请填写反馈内容',
+        icon: 'none'
+      })
       return false;
     }
 
@@ -71,7 +81,7 @@ Page({
           console.log(res.data);
           if (res.data.status == 'success') {
             that.setData({
-              feedbackRes: '谢谢您的反馈，我们将会做得更好!  ❤️ '
+              feedbackRes: '谢谢您的反馈! ❤️ '
             });
           } else if (res.data.status == 'failed') {
             that.setData({

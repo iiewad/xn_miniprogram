@@ -41,9 +41,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#3598dc",
     "navigationBarBackgroundColor": "#3598dc",
-    "navigationBarTitleText": "XNQN",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "We湘农",
+    "navigationBarTextStyle": "white",
+    "backgroundColorTop": "#F1F1F1"
   }
 }

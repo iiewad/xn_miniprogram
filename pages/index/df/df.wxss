@@ -44,7 +44,6 @@
 
 .query-button {
   background-color: #1f6ed4;
-  border: 1px solid #fff;
   width: 90%;
   margin: 30rpx auto;
   box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
