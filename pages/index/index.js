@@ -114,8 +114,13 @@ Page({
         that._loadData();
       },
       fail: function () {
+        console.log('Index Get StuInfo Failed')
         that.setData({
-          funcEnabled: false
+          funcEnabled: false,
+          loadingHidden: 1
+        });
+        wx.navigateTo({
+          url: '../bind_user/bind_user'
         });
       }
     });

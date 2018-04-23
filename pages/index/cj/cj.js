@@ -53,7 +53,6 @@ Page({
     params.stuNumber = stuNumber;
     params.stuCardCode = stuCardCode;
     util.requestQuery(url, params, 'GET', function(res) {
-      wx.hideLoading();
       console.log(res.data);
       var xn = Object.keys(res.data.grades);
       var grades = res.data.grades;
@@ -64,7 +63,8 @@ Page({
         grades: grades,
         currentXN: currentXN,
         grade: grade
-      })
+      });
+      wx.hideLoading();
     }, function(res) {
       console.log('Failed');
     }, function(res) {

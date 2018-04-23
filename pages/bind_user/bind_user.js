@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+const util = require("../../utils/util.js");
 
 Page({
   data: {
@@ -19,36 +20,33 @@ Page({
   formSubmit: function (e) {
     wx.showToast({
       title: '加载中',
-      icon: 'loading',
-      duration: 1500
+      icon: 'loading'
     });
     if(this.checkForm(e)) {
       console.log("Input Data is OK");
       var stu_user = {}
       stu_user.stu_number = e.detail.value.stu_number
       stu_user.stu_password = e.detail.value.stu_password
-      console.log(stu_user)
       this.requestXnService(stu_user);
     } else {
-      
+      console.warn('Form Warn')
     }
   },
+
   checkForm: function (e) {
     var formValue = e.detail.value
     if (formValue["stu_number"] == "") {
       wx.showToast({
         title: '学号不能为空',
-        icon: 'none',
-        duration: 1500
+        icon: "none"
       });
       return false;
     }
     if (formValue["stu_password"] == "") {
       wx.showToast({
         title: '密码不能为空',
-        icon: 'none',
-        duration: 1500
-      })
+        icon: "none"
+      });
       return false;
     }
     return true;
@@ -61,7 +59,7 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           wx.request({
-            url: app.globalData.url + '/api/bind-stu-user', //仅为示例，并非真实的接口地址
+            url: app.globalData.url + '/api/bind-stu-user',
             data: {
               'stu_user[stu_number]': stu_user.stu_number,
               'stu_user[stu_password]': stu_user.stu_password,
@@ -70,36 +68,42 @@ Page({
             method: "GET",
             header: {
               "accept": "application/vnd.api+json;version=1",
-              'content-type': 'application/json' // 默认值
+              'content-type': 'application/json'
             },
             success: function (res) {
               console.log(res.data);
               if (res.data.status == "failed") {
                 wx.showToast({
                   title: '绑定失败: ' + res.data.message_detail,
-                  icon: 'none',
-                  duration: 2000
+                  icon: 'none'
                 });
               }
               if (res.data.status == "success") {
+                wx.hideToast();
                 console.table(res.data);
-                wx.reLaunch({
-                  url: '../me/me'
-                });
                 wx.setStorage({
                   key: 'stuUserInfo',
-                  data: res.data.userinfo
-                });
-                wx.showToast({
-                  title: '绑定成功',
-                  icon: 'success',
-                  duration: 2000
+                  data: res.data.data,
+                  success: function() {
+                    wx.showToast({
+                      title: '绑定成功'
+                    });
+                    wx.reLaunch({
+                      url: '../index/index'
+                    });
+                  }
                 });
               }
             }
           });
         } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
+          console.warn('获取用户登录态失败！' + res.errMsg)
+          wx.showToast({
+            title: '发生了很奇怪的错误'
+          });
+          wx.reLaunch({
+            url: '../index/index',
+          });
         }
       }
     })

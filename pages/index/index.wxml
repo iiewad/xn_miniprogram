@@ -35,20 +35,23 @@
   </block>
 
   <!-- 今天课表  -->
-  <view class="timetable" bindtap="onTimeTableTab">
-    <view class="timetable-title">今日课表</view>
-    <template is="timetables" data="{{course:todayTable}}"></template>
-  </view>
+  <block wx:if="{{loginFlag}}">
+    <view class="timetable" bindtap="onTimeTableTab">
+      <view class="timetable-title">今日课表</view>
+      <template is="timetables" data="{{course:todayTable}}"></template>
+    </view>
+  </block>
+
 
   <loading hidden="{{loadingHidden}}">
     加载中
   </loading>
 
-  <!--<view class="feature-content">
-    <view class="today-kb"></view>
-    <view class="today-cj"></view>
-    <view class="today-news"></view>
-    <view class="today-borw"></view>
-  </view>-->
+  <view class="no-login-panel" wx:if="{{!loginFlag}}">
+    <view class="panel-emoji"> 😔 </view>
+    <view class="panel-button">
+      <button>前往绑定</button>
+    </view>
+  </view>
 
 </view>

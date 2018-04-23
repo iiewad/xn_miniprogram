@@ -46,7 +46,7 @@ App({
         });
       },
       fail: function () {
-        that.wxLogin();
+        that.appLogin();
       }
     });
   },
@@ -54,14 +54,13 @@ App({
   globalData: {
     userInfo: null,
     url: 'https://api.xnqn.com',
-    /*url: 'https://api.hunau.club',*/
     /*url: 'http://localhost:3030',*/
     stuUserInfo: ''
   },
 
   towxml: new Towxml(),
 
-  wxLogin: function () {
+  appLogin: function () {
     wx.login({
       success: res => {
         var code = res.code;
@@ -81,13 +80,8 @@ App({
                 key: 'stuUserInfo',
                 data: res.data.data,
               });
-              wx.reLaunch({
-                url: '/pages/index/index',
-              });
             } else if (res.data.status === 'failed') {
-              wx.navigateTo({
-                url: '/pages/bind_user/bind_user',
-              });
+              console.warn('Login Failed');
             }
           }, function (res) {
             console.log('Failed');
@@ -97,7 +91,5 @@ App({
         }
       }
     })
-  },
-
-
+  }
 })
